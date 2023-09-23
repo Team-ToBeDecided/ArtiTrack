@@ -10,7 +10,6 @@
 //   plugins: [],
 // }
 
-
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 module.exports = withMT({
@@ -35,6 +34,9 @@ module.exports = withMT({
         Charcoal: "#383330",
         Sandalwood: "#964E15",
       },
+      backgroundImage: {
+        'loginBg': `url("./src/assets/random/loginImage.svg")`,
+      }
       // fontFamily: {
       //   'inter': ['Inter'],
       // },
