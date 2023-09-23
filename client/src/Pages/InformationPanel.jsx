@@ -23,14 +23,14 @@ const URLBox = () => {
     });
     
     return (
-        <Box {...getRootProps()} className={` flex justify-center shadow-xl w-[200px] h-[200px] cursor-pointer`}>
+        <Box {...getRootProps()} className={` flex justify-center shadow-md w-[200px] h-[200px] cursor-pointer`}>
             <input {...getInputProps()} />
             <Box className="flex flex-col items-center gap-2">
                 <div  className="cursor-pointer">
                     
                     {previewImage ? null : (
                         
-                        <button className="p-2 w-full text-[8px] bg-green-100 border rounded-[20px]">
+                        <button className="p-2 w-full text-[8px] bg-green-200 border rounded-[20px]">
                             Add from URL
                         </button>
                     )}
@@ -61,7 +61,7 @@ const BigURLBox = () => {
     });
     
     return (
-        <Box {...getRootProps()} className={` flex justify-center shadow-xl w-[500px] h-[440px] cursor-pointer`}>
+        <Box {...getRootProps()} className={` flex justify-center shadow-md w-[500px] h-[440px] cursor-pointer`}>
             <input {...getInputProps()} />
             <Box className="flex flex-col items-center gap-2">
                 <div className="cursor-pointer">
@@ -414,7 +414,7 @@ const InformationPanel = () => {
                         </Typography>
                     </Box>
                 </Box>
-                <Box className="flex flex-col p-10 border-black shadow-lg border-1">
+                <Box className="flex flex-col p-10 border-black shadow-md border-1">
                     <Box className="flex flex-col gap-10">
                         <Box className="flex flex-col w-full">
                             <Typography variant="h5">Title:</Typography>
@@ -453,7 +453,7 @@ const InformationPanel = () => {
                         </Box>
                     </Box>
                 </Box>
-                <Box className="flex p-10 border-black shadow-lg border-1">
+                <Box className="flex p-10 border-black shadow-md border-1">
                     <Box className="flex flex-col gap-10">
                         <Typography variant="h5">Media</Typography>
                         <Box className="flex gap-10">
@@ -479,7 +479,7 @@ const InformationPanel = () => {
                         </Box>
                     </Box>
                 </Box>
-                <Box className="flex flex-col p-10 border-black shadow-lg border-1">
+                <Box className="flex flex-col p-10 border-black shadow-md border-1">
                     <Box className="flex flex-col gap-10">
                         <Box className="flex flex-col w-full">
                             <Typography variant="h5">Stock:</Typography>
@@ -507,18 +507,18 @@ const InformationPanel = () => {
                 </Box>
             </Box>
             <Box className="flex gap-12 flex-col w-1/5 h-[100%]">
-                <Box className="flex flex-col justify-center gap-10 p-8 shadow-xl">
+                <Box className="flex flex-col justify-center gap-10 p-8 shadow-md">
                     <Typography variant="h5">Status</Typography>
                     <Select label="Status">
                         <Option>Active</Option>
                         <Option>Inactive</Option>
                     </Select>
                 </Box>
-                <Box className="flex flex-col justify-center gap-10 p-8 shadow-xl">
+                <Box className="flex flex-col justify-center gap-10 p-8 shadow-md">
                     <Typography variant="h5">Product Details</Typography>
                     <Box className="flex flex-col gap-10">
                         <Box className="flex flex-col w-full">
-                            <Typography variant="h5">Material:</Typography>
+                            <Typography variant="h7">Material:</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter material here"
@@ -528,7 +528,7 @@ const InformationPanel = () => {
                             />
                         </Box>
                         <Box className="flex flex-col w-full">
-                            <Typography variant="h5">Craft:</Typography>
+                            <Typography variant="h7">Craft:</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter craft here"
@@ -538,7 +538,7 @@ const InformationPanel = () => {
                             />
                         </Box>
                         <Box className="flex flex-col w-full">
-                            <Typography variant="h5">District:</Typography>
+                            <Typography variant="h7">District:</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter district here"
@@ -548,7 +548,7 @@ const InformationPanel = () => {
                             />
                         </Box>
                         <Box className="flex flex-col w-full">
-                            <Typography variant="h5">Measurements:</Typography>
+                            <Typography variant="h7">Measurements:</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter measurements here"
@@ -558,7 +558,7 @@ const InformationPanel = () => {
                             />
                         </Box>
                         <Box className="flex flex-col w-full">
-                            <Typography variant="h5">Product Weight:</Typography>
+                            <Typography variant="h7">Product Weight:</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter product weight here"
@@ -568,7 +568,7 @@ const InformationPanel = () => {
                             />
                         </Box>
                         <Box className="flex flex-col w-full">
-                            <Typography variant="h5">Price</Typography>
+                            <Typography variant="h7">Price</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter product weight here"
@@ -580,7 +580,7 @@ const InformationPanel = () => {
                     </Box>
                 </Box>
 
-                <Box className="flex flex-col justify-center gap-10 p-8 shadow-xl">
+                <Box className="flex flex-col justify-center gap-10 p-8 shadow-md">
                     <Typography variant="h5">Insights</Typography>
                     <Typography variant="p">
                         Insights will be displayed when the product has recent sales
