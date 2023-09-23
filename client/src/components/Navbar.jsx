@@ -7,12 +7,15 @@ import {
 } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import GoogleTranslate from "./GoogleTranslate";
+import { useContext } from "react";
+import { AuthContext } from "./AuthContext";
 
 export const NavbarDefaut = () => {
   // const [lang, setLang] = React.useState("hi,ur,en");
+  const { accessToken, userData, userRole, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleTranslateToUrdu = () => {
-    console.log("hindi choot")
+    console.log("hindi choot");
     const googleTranslateElement = document.getElementById(
       "google_translate_element"
     );
@@ -81,24 +84,35 @@ export const NavbarDefaut = () => {
           onClick={handleTranslateToUrdu}
           className="w-10 hover:none bg-Charcoal mr-10"
         >
-          اردو   
+          اردو
         </Button>
       </Card>
       <Card className=" bg-Sandalwood h-12 rounded-none flex-row items-center justify-end shadow-none">
         {/* <Button variant="text" size="sm" className=" h-10 text-white shadow-none" ripple={false}>
           Login
         </Button> */}
-        <Typography color="white" onClick={()=>navigate('/login')} className="cursor-pointer px-2">
-          Login
+        <Typography color="white" className="mr-3">
+          {user ? `Hello, ${user}` : null}
         </Typography>
-        <Typography color="white">|</Typography>
-        <Typography
-          color="white"
-          onClick={() => navigate("/masti")}
-          className="cursor-pointer px-2 mr-3"
-        >
-          SignUp
-        </Typography>
+        {accessToken ? null : (
+          <>
+            <Typography
+              color="white"
+              onClick={() => navigate("/login")}
+              className="cursor-pointer px-2"
+            >
+              Login
+            </Typography>
+            <Typography color="white">|</Typography>
+            <Typography
+              color="white"
+              onClick={() => navigate("/signup")}
+              className="cursor-pointer px-2 mr-3"
+            >
+              SignUp
+            </Typography>
+          </>
+        )}
         <MagnifyingGlassIcon className="h-6 w-6 text-white mr-5 cursor-pointer" />
         <HeartIcon className="h-6 w-6 text-white mr-5 cursor-pointer" />
         <ShoppingCartIcon className="h-6 w-6 text-white mr-10 cursor-pointer" />

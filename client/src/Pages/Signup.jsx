@@ -4,9 +4,11 @@ import { Button, Input, Typography } from "@material-tailwind/react";
 import image from "../assets/random/loginImage.svg";
 import { AuthContext } from "../components/AuthContext";
 
-export const Login = () => {
+export const Signup = () => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+
+    const [userType, setUserType] = React.useState("Consumer");
 
     const {login} = useContext(AuthContext);
 
@@ -48,7 +50,7 @@ export const Login = () => {
         </div>
         <div className="lg:w-1/2 px-56 h-[79vh] flex flex-col gap-5 items-center justify-center">
             <Typography color="black" className="text-xl self-start">
-            LOGIN
+            {userType}&nbsp;SIGNUP
             </Typography>
             <Typography color="gray" className="text-sm self-start">
                 If you are already registered, please log in.

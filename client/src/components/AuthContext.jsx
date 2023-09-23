@@ -31,23 +31,29 @@ export function AuthProvider({ children }) {
     localStorage.setItem("userData", JSON.stringify(userData || ""));
   }, [accessToken, user, userRole, userData]);
 
-  const login = async (email, password, userType) => {
-    setLoading(true);
+  const login = async (email, password) => {
+    setAccessToken(null);
+    setUser(null);
+    setUserRole(null);
+    setUserData(null);
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("userData");
     try {
-      const response = await axios.post("login/", {
+      const response = await axios.post(" http://127.0.0.1:8000/users/login/", {
         email: email,
         password: password,
-        user_type: userType,
       });
-      setAccessToken(response.data.token);
-      setUser(response.data.name);
-      setUserRole(response.data.user_type);
-      setUserData(response.data);
-      setLoading(false);
+      console.log(response);
+      setAccessToken(response?.data?.access);
+      setUserData(response?.data?.user);
+      setUser(response.data.user.first_name);
+      setUserRole(response.data?.user?.role);
+      // setUserData(response.data);
     } catch (error) {
       console.error("Failed to login", error);
       setError("Incorrect Username or Password");
-      setLoading(false);
     }
   };
 
