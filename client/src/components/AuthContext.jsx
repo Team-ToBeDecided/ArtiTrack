@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
-// import { BASE_URL } from "../../constants/constants";
+import { BASE_URL } from "../constants/basUrl";
 
 export const AuthContext = createContext(null);
 
@@ -41,7 +41,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("userRole");
     localStorage.removeItem("userData");
     try {
-      const response = await axios.post(" http://127.0.0.1:8000/users/login/", {
+      const response = await axios.post(BASE_URL+"/users/login/", {
         email: email,
         password: password,
       });

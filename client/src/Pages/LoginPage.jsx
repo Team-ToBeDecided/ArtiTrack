@@ -3,30 +3,40 @@ import { Button, Input, Typography } from "@material-tailwind/react";
 import image from "../assets/random/loginImage.svg";
 import { AuthContext } from "../components/AuthContext";
 import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const { login, accessToken, userType } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (accessToken !== null || userType === "consumer") {
+      navigate("/products");
+    }
+  }, [accessToken, userType]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-  }
+  };
 
   const handlePassWordChange = (e) => {
     setPassword(e.target.value);
-  }
+  };
 
   const handleLogin = () => {
     console.log(email, password);
-    login(email, password)
-  }
+    login(email, password);
+  };
 
   return (
     <>
       <div className="items-center lg:flex">
-        <Box className=" lg:w-1/2 h-[79vh] flex flex-col items-center justify-center"
+        <Box
+          className=" lg:w-1/2 h-[79vh] flex flex-col items-center justify-center"
           sx={{
             backgroundImage: `url(${image})`,
             backgroundRepeat: "no-repeat",
@@ -94,7 +104,11 @@ export const Login = () => {
             Create your account and enjoy a new shopping experience.{" "}
             {/* <span className="cursor-pointer text-lightBlue-500">Sign up</span> */}
           </Typography>
-          <Button variant="filled" size="regular" className="w-full rounded-none bg-Charcoal">
+          <Button
+            variant="filled"
+            size="regular"
+            className="w-full rounded-none bg-Charcoal"
+          >
             Sign Up
           </Button>
         </div>
