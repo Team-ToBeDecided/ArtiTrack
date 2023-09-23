@@ -1,7 +1,7 @@
 import React from 'react'
 import OrderProp from '../components/Order/OrderProp'
 
-const ProductCartPage = () => {
+export function ProductCartPage(){
   return (
       <>
     <div className='p-16 w-8/12 text-xs'>

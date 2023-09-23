@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useMediaQuery } from '@mui/material';
+import { Typography, useMediaQuery } from '@mui/material';
 
 function ProductCard(
     // { product }
@@ -13,14 +13,6 @@ function ProductCard(
     const navigate = useNavigate();
 
     const md = useMediaQuery("(min-width:1024px)")
-
-    // const handleDetails = () => {
-    //     navigate(`/product/${product.id}`, {
-    //         state: {
-    //             item: product
-    //         }
-    //     });
-    // };
 
     return (
         <div className={`relative group ${md ? 'w-full' : 'w-[100%] justify-center align-center'}`}>
@@ -37,19 +29,18 @@ function ProductCard(
             <div className='w-full border-[1px] px-2 py-4'>
                 <div className='flex justify-between align-center'>
                     <div>
-                        <h2 className='text-2xl font-bold font-titleFont'>
-                            {/* {product.Name} */}
+                        <Typography sx={{
+                            fontFamily: 'var(--heading)',
+                        }} className='text-2xl'>
                             Item 1
-                        </h2>
+                        </Typography>
                     </div>
                     <div className='relative flex gap-2 overflow-hidden w-28'>
                         <div className='relative flex justify-end gap-2 px-2 mx-2 transition-transform duration-500 transform group-hover:translate-x-32 -text-sm w-28'>
-                            <p className="line-through text-[12px] text-gray-500">
-                                {/* ${product.Old_Price} */}
+                            <p className="line-through text-[15px] text-gray-500">
                                 $100
                             </p>
-                            <p className='font-semibold text-[12px]'>
-                                {/* ${product.New_Price} */}
+                            <p className='font-semibold text-[16px]'>
                                 $50 
                             </p>
                         </div>
@@ -66,7 +57,6 @@ function ProductCard(
                 </div>
                 <div>
                     <p>
-                        {/* {product.Category} */}
                         Shawl
                     </p>
                 </div>

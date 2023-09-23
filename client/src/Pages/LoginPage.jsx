@@ -46,7 +46,7 @@ export const Login = () => {
           {/* <img src={image} className="w-full " /> */}
           <Typography
             color="white"
-            className="text-5xl font-extrabold ml-20 mt-[-80px] self-start"
+            className="font-heading text-5xl font-extrabold ml-20 mt-[-80px] self-start"
           >
             Embrace the <br />{" "}
             <span className="text-white">spirit of India</span>
@@ -54,7 +54,7 @@ export const Login = () => {
           <br />
           <Typography
             color="white"
-            className="text-sm w-[30rem] ml-20 self-start"
+            className="text-md w-[30rem] ml-20 font-body self-start"
           >
             An unparalleled legacy that spans millennia. Pure, authentic craft
             sourced from artisans across the Indian sub- continent. Our vast
@@ -63,10 +63,10 @@ export const Login = () => {
           </Typography>
         </Box>
         <div className="lg:w-1/2 px-56 h-[79vh] flex flex-col gap-5 items-center justify-center">
-          <Typography color="black" className="self-start text-xl">
+          <Typography  color="black" className="text-heading -xl fontself-start">
             LOGIN
           </Typography>
-          <Typography color="gray" className="self-start text-sm">
+          <Typography color="gray" className="text-sm font-self-start font-body">
             If you are already registered, please log in.
           </Typography>
           <Input
@@ -87,7 +87,7 @@ export const Login = () => {
             className="rounded-none "
             onChange={handlePassWordChange}
           />
-          <Typography color="gray" className="self-start text-xs">
+          <Typography color="gray" className="self-start text-xs font-body">
             <span className="cursor-pointer hover:underline">
               Forgot Password?
             </span>
@@ -100,7 +100,7 @@ export const Login = () => {
           >
             Login
           </Button>
-          <Typography color="gray" className="mt-5 text-sm">
+          <Typography color="gray" className="mt-5 text-sm font-body">
             Create your account and enjoy a new shopping experience.{" "}
             {/* <span className="cursor-pointer text-lightBlue-500">Sign up</span> */}
           </Typography>

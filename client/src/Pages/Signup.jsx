@@ -5,6 +5,7 @@ import image from "../assets/random/loginImage.svg";
 import { AuthContext } from "../components/AuthContext";
 import axios from "axios";
 import { BASE_URL } from "../constants/basUrl";
+import { Box } from "@mui/material";
 
 export const Signup = () => {
   const [email, setEmail] = React.useState("");
@@ -114,9 +115,13 @@ export const Signup = () => {
 
   return (
     <>
-      <div className="lg:flex items-center">
-        <div className=" lg:w-1/2 bg-loginBg h-screen flex flex-col items-center justify-center">
-          {/* <img src={image} className=" w-full" /> */}
+      <div className="items-center lg:flex">
+        <Box className="flex flex-col items-center justify-center h-screen lg:w-1/2" sx={{
+          backgroundImage: `url(${image})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}>
+          {/* <img src={image} className="w-full " /> */}
           <Typography
             color="white"
             className="text-5xl font-extrabold ml-20 mt-[-80px] self-start"
@@ -135,11 +140,11 @@ export const Signup = () => {
             some of the world's oldest handicrafts.
           </Typography>
           <br />
-          <div className="flex flex-row gap-5 self-start ml-20">
+          <div className="flex flex-row self-start gap-5 ml-20">
             <Button
               variant="filled"
               size="regular"
-              className="bg-Charcoal rounded-none"
+              className="rounded-none bg-Charcoal"
               ripple={false}
               onClick={() => setUserType("Consumer")}
             >
@@ -148,7 +153,7 @@ export const Signup = () => {
             <Button
               variant="filled"
               size="regular"
-              className="bg-Charcoal rounded-none"
+              className="rounded-none bg-Charcoal"
               ripple={false}
               onClick={() => setUserType("WholeSale Consumer")}
             >
@@ -157,19 +162,19 @@ export const Signup = () => {
             <Button
               variant="filled"
               size="regular"
-              className="bg-Charcoal rounded-none"
+              className="rounded-none bg-Charcoal"
               ripple={false}
               onClick={() => setUserType("Artisan")}
             >
               Artisan
             </Button>
           </div>
-        </div>
-        <div className="lg:w-1/2 px-56 h-full flex flex-col gap-5 items-center justify-center">
-          <Typography color="black" className="text-xl self-start">
+        </Box>
+        <div className="flex flex-col items-center justify-center h-full gap-5 px-56 lg:w-1/2">
+          <Typography color="black" className="self-start text-xl">
             {userType}&nbsp;SIGNUP
           </Typography>
-          <Typography color="gray" className="text-sm self-start">
+          <Typography color="gray" className="self-start text-sm">
             If you are already registered, please log in.
           </Typography>
           {userType === "Artisan" ? (
@@ -437,7 +442,7 @@ export const Signup = () => {
           <Button
             variant="outlined"
             size="regular"
-            className=" rounded-none w-full"
+            className="w-full rounded-none "
             onClick={handleSignup}
           >
             SignUp
