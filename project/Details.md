@@ -25,4 +25,3 @@
 
 #### Register Endpoint: http://127.0.0.1:8000/users/register/
 #### Login Endpoint: http://127.0.0.1:8000/users/login/
-

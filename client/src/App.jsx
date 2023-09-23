@@ -9,6 +9,8 @@ import { LandingPage } from "./Pages/LandingPage";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./Router";
 import GoogleTranslate from "./components/GoogleTranslate";
+import { AuthProvider } from "./components/AuthContext";
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,6 +18,7 @@ function App() {
   return (
     <>
       {/* <GoogleTranslate /> */}
+      <AuthProvider>
       <BrowserRouter>
         <div id="google_translate_element" className=" h-0">
           {/* Other content */}
@@ -25,6 +28,7 @@ function App() {
           {/* </AuthProvider> */}
         </div>
       </BrowserRouter>
+      </AuthProvider>
     </>
   );
 }

@@ -88,7 +88,7 @@ export const NavbarDefaut = () => {
         {/* <Button variant="text" size="sm" className=" h-10 text-white shadow-none" ripple={false}>
           Login
         </Button> */}
-        <Typography color="white" className="cursor-pointer px-2">
+        <Typography color="white" onClick={()=>navigate('/login')} className="cursor-pointer px-2">
           Login
         </Typography>
         <Typography color="white">|</Typography>
