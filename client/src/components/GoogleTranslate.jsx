@@ -43,37 +43,37 @@
 // };
 
 
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 
-const GoogleTranslate = () => {
-  const googleTranslateElementInit = () => {
-    new window.google.translate.TranslateElement(
-      {
-        pageLanguage: 'en',
-        // // layout: window.google.translate.TranslateElement.FloatPosition.TOP_LEFT
-        includedLanguages: 'hi,ur,en',
+// const GoogleTranslate = () => {
+//   const googleTranslateElementInit = () => {
+//     new window.google.translate.TranslateElement(
+//       {
+//         pageLanguage: 'en',
+//         // // layout: window.google.translate.TranslateElement.FloatPosition.TOP_LEFT
+//         includedLanguages: 'hi,ur,en',
 
-        layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+//         // layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
 
-        // includedLanguages: 'hi,ur,en',
-        // layout: window.google.translate.TranslateElement.FloatPosition.TOP_LEFT
-        // layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      },
-      'google_translate_element'
-    );
-  };
+//         // includedLanguages: 'hi,ur,en',
+//         layout: window.google.translate.TranslateElement.FloatPosition.TOP_LEFT,
+//         // layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+//         autoDisplay: false
+//       },
+//       'google_translate_element'
+//     );
+//   };
 
-  useEffect(() => {
-    googleTranslateElementInit();
-  }, []);
+//   useEffect(() => {
+//     googleTranslateElementInit();
+//   }, []);
 
-  return <div id="google_translate_element"></div>;
-};
+//   return <div id="google_translate_element"></div>;
+// };
 
 
 
-export default GoogleTranslate;
+// export default GoogleTranslate;
 
 
 // previous version
@@ -105,3 +105,29 @@ export default GoogleTranslate;
 // }
 
 // export default GoogleTranslate;
+
+
+import React, { useEffect } from "react";
+
+const GoogleTranslate = ({ language }) => {
+  console.log (language);
+  const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        includedLanguages: language,
+        layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false,
+      },
+      "google_translate_element"
+    );
+  };
+
+  useEffect(() => {
+    googleTranslateElementInit();
+  }, [language]);
+
+  return <div id="google_translate_element"></div>;
+};
+
+export default GoogleTranslate;

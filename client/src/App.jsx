@@ -15,12 +15,15 @@ function App() {
 
   return (
     <>
-      <GoogleTranslate />
+      {/* <GoogleTranslate /> */}
       <BrowserRouter>
-      <NavbarDefaut />
-        {/* <AuthProvider> */}
-            <AppRoutes />
-        {/* </AuthProvider> */}
+        <div id="google_translate_element" className=" h-0">
+          {/* Other content */}
+          <NavbarDefaut />
+          {/* <AuthProvider> */}
+          <AppRoutes />
+          {/* </AuthProvider> */}
+        </div>
       </BrowserRouter>
     </>
   );
