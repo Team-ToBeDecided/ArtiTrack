@@ -19,6 +19,13 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(email, password, **extra_fields)
 
+ROLE = [
+    ('consumer', 'consumer'),
+    ('artisan', 'artisan'),
+    ('admin', 'admin'),
+    ('wholesaler', 'wholesaler'),
+]
+
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30)
@@ -26,16 +33,16 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
-    role = models.CharField(max_length=30, default='consumer')
+    role = models.CharField(max_length=30, choices=ROLE)
     age = models.IntegerField(default=0)
     gender = models.CharField(max_length=10)
     phone_number = models.CharField(max_length=15)
-    address = models.CharField(max_length=100)
+    address = models.CharField(max_length=100, null=True, blank=True)
     district = models.CharField(max_length=30, null=True, blank=True)
-    craft = models.CharField(max_length=30, default='none')
-    description = models.CharField(max_length=200, default='none')
+    craft = models.CharField(max_length=30, null=True)
+    description = models.CharField(max_length=200, null=True)
     profile_image = models.ImageField(upload_to='profile_image', blank=True, null=True)
-    gstin = models.CharField(max_length=30, default='none')
+    gstin = models.CharField(max_length=30, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
