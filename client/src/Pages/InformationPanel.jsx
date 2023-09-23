@@ -481,9 +481,9 @@ const InformationPanel = () => {
                 </Box>
                 <Box className="flex flex-col p-10 border-black shadow-md border-1">
                     <Box className="flex flex-col gap-10">
-                        <Box className="flex flex-col w-full">
+                        <Box className="flex flex-col gap-2 w-full">
                             <Typography variant="h5">Stock:</Typography>
-                            <Typography variant="h5">Available for Sale</Typography>
+                            <Typography variant="h7">Available for Sale</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter title here"
