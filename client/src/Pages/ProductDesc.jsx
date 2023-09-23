@@ -33,7 +33,8 @@ const DetailType = ({ name, value }) => {
                     textTransform: 'uppercase',
                     fontWeight: 600,
                     color: 'var(--authentic)',
-                    letterSpacing: 'var(--authentic-letter-spacing)'
+                    letterSpacing: 'var(--authentic-letter-spacing)',
+                    fontFamily: 'var(--heading)'
                 }}
             >
                 {/* {details.Name} */}
@@ -43,7 +44,8 @@ const DetailType = ({ name, value }) => {
                 sx={{
                     fontSize: 'var(--product-desc)',
                     color: 'black',
-                    lineHeight: 'var(--product-desc-line-height)'
+                    lineHeight: 'var(--product-desc-line-height)',
+                    fontFamily: 'var(--body)'
                 }}
             >
                 {value}
@@ -188,7 +190,8 @@ const Product2 = ({ item }) => {
                                     fontSize: 'var(--product-name)',
                                     fontWeight: 'bold',
                                     color: 'black',
-                                    lineHeight: 'var(--product-name-line-height)'
+                                    lineHeight: 'var(--product-name-line-height)',
+                                    fontFamily: 'var(--heading)'
                                 }}
                             >
                                 Kalighat Painting With Mount - The Couple (25" x 17")
@@ -211,7 +214,8 @@ const Product2 = ({ item }) => {
                                 width: '75%',
                                 fontSize: 'var(--product-desc)',
                                 color: 'black',
-                                lineHeight: 'var(--product-desc-line-height)'
+                                lineHeight: 'var(--product-desc-line-height)',
+                                fontFamily: 'var(--body)'
                             }}
                         >
                             A beautifully stylised and relatively contemporary art form. Kalighat Painting evolved as a unique painting style in the rapidly urbanizing cityscape of 19th-century Kolkata, West Bengal. The style of these paintings is characterized by their bold sweeping brush lines, bold colours and a simplification of forms.
@@ -301,8 +305,12 @@ const Product2 = ({ item }) => {
                 <Box className="flex justify-center">
                     <Box className="flex flex-col items-center lg:items-start gap-20 w-[90%]">
                         <CustomButton text="Preserve Artisan's Heritage" bgcolor="#383330" />
-                        <Typography variant='h3'>Support the Artisan's</Typography>
-                        <Typography variant='p' width="90%">
+                        <Typography sx={{
+                            fontFamily: 'var(--heading)'
+                        }} variant='h3'>Support the Artisan's</Typography>
+                        <Typography sx={{
+                            fontFamily: 'var(--body)'
+                        }} variant='p' width="90%">
                             Over the years, we have cultivated direct relationships with a
                             wide network of artisans and craft centric enterprises across the
                             country. Our primary mission is to empower the Indian artisan
@@ -314,7 +322,9 @@ const Product2 = ({ item }) => {
                 </Box>
                 <Box className="flex justify-center w-[90%]">
                     <Box className="flex flex-col w-full gap-7">
-                        <Typography variant='h3'>Product Details</Typography>
+                        <Typography sx={{
+                            fontFamily: 'var(--heading)'
+                        }} variant='h3'>Product Details</Typography>
                         <DetailType name='Material' value='Cotton' />
                         <Breakerline />
                         <DetailType name='Color' value='Black' />
@@ -329,7 +339,9 @@ const Product2 = ({ item }) => {
             </Box>
             <Box height={30} />
             <Box className="flex flex-col justify-center m-20">
-                <Typography variant='h3'>Similar Products</Typography>
+                <Typography sx={{
+                    fontFamily: 'var(--heading)'
+                }} variant='h3'>Similar Products</Typography>
                 <Box>
                     <div className="grid gap-10 mt-10 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
                         <ProductCard

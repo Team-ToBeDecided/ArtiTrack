@@ -5,9 +5,9 @@ import Product2 from "./Pages/ProductDesc";
 import Products from "./Pages/Products";
 import { Login } from "./Pages/LoginPage";
 import { Signup } from "./Pages/Signup";
-import InformationPanel from "./Pages/InformationPanel";
 import { ConsumerProfilePage } from "./Pages/ConsumerProfilePage";
 import ProductCartPage from "./Pages/ProductCartPage";
+import ProductUpload from "./Pages/ProductUpload";
 import { ArtisanProfilePage } from "./Pages/ArtisanProfilePage";
 
 export const AppRoutes = () => {
@@ -19,7 +19,7 @@ export const AppRoutes = () => {
                 <Route path="/products" element={<Products />} />
                 <Route path="/products/desc" element={<Product2 />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/info-panel" element={<InformationPanel />} />
+                <Route path="/productUpload" element={<ProductUpload />} />
                 <Route path="/consumerProfile" element={<ConsumerProfilePage />} />
                 <Route path="/artisanProfile" element={<ArtisanProfilePage />} />
                 <Route path="/cart" element={<ProductCartPage />} />

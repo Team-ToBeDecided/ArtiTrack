@@ -36,10 +36,13 @@ module.exports = withMT({
       },
       backgroundImage: {
         'loginBg': `url("./src/assets/random/loginImage.svg")`,
-      }
-      // fontFamily: {
-      //   'inter': ['Inter'],
-      // },
+      },
+      fontFamily: {
+        'inter': ['Inter'],
+        'poppins': ['Poppins'],
+        'heading': ['Cormorant Garamond'],
+        'body': ['Playfair Display']
+      },
     },
   },
   plugins: [],
