@@ -3,6 +3,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import landingBg from '../assets/random/landingBg.svg'
 
+
 export const Feature = () => {
   return (
     <>

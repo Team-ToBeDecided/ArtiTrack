@@ -2,19 +2,19 @@ import React from 'react'
 import { Button } from '@mui/material'
 
 
-const CustomButton = ({ text, click , bgcolor }) => {
+const CustomButton = ({ text, click , bgcolor , padding="20px" }) => {
     return (
         <Button
             variant='contained'
             onClick={click}
             sx={{
                 backgroundColor: bgcolor ? bgcolor : 'var(--authentic)',
-                width:'300px',
+                minWidth:'300px',
                 color: 'white',
                 border: 'none',
                 borderRadius: '0px',
                 fontSize: '15px',
-                padding: '20px',
+                padding: padding,
                 '&:hover': {
                     transitionDuration: '500',
                     backgroundColor: 'white',
@@ -22,7 +22,7 @@ const CustomButton = ({ text, click , bgcolor }) => {
                     borderWidth: '1px',
                     borderColor: bgcolor ? bgcolor : 'var(--authentic)', 
                     borderStyle: 'solid',
-                    padding:'20px'
+                    padding: padding
                 },
             }}
         >
