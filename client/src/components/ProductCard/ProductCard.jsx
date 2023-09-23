@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Typography, useMediaQuery } from '@mui/material';
 
-function ProductCard(
+export function ProductCard(
     // { product }
     ) {
     // const dispatch = useDispatch();

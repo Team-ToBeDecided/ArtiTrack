@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiEdit2 } from 'react-icons/fi';
-
+import { ProductCard } from '../components/ProductCard/ProductCard';
 export function ArtisanProfilePage() {
   const [isEditable, setIsEditable] = useState(false);
   const [username, setUsername] = useState('Username_of_Artisan');
@@ -47,7 +47,7 @@ export function ArtisanProfilePage() {
               </div>
             </button>
           </div>
-          <div className='pl-28 pt-2 flex gap-28'>
+          <div className='pl-28 pt-2 flex gap-56'>
             <p className='font-semibold text-2xl'>13 Products</p>
             <p className='font-semibold text-2xl'>
               {isEditable ? (
@@ -66,7 +66,7 @@ export function ArtisanProfilePage() {
             <p className='font-body text-2xl'>
               {isEditable ? (
                 <input
-                  style={{ width: '210px', padding: '0' }}
+                  style={{ width: '175px', padding: '0' }}
 
                   type="text"
                   value={phone}
@@ -117,9 +117,10 @@ export function ArtisanProfilePage() {
       <div className='p-16'>
         <div className='w-12/12 h-[1px] bg-black'></div>
       </div>
-      <div class="grid grid-cols-4 gap-4">
-        <div>01</div>
-        <div>09</div>
+      <div class="pl-16 pr-16 pb-16 grid grid-cols-3 gap-4">
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
       </div>
     </>
   );
