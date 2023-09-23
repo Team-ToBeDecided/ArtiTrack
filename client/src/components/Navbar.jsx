@@ -12,7 +12,7 @@ import { AuthContext } from "./AuthContext";
 
 export const NavbarDefaut = () => {
   // const [lang, setLang] = React.useState("hi,ur,en");
-  const { accessToken, userData, userRole, user } = useContext(AuthContext);
+  const { accessToken, userData, userRole, user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleTranslateToUrdu = () => {
     console.log("hindi choot");
@@ -88,9 +88,9 @@ export const NavbarDefaut = () => {
         </Button>
       </Card>
       <Card className=" bg-Sandalwood h-12 rounded-none flex-row items-center justify-end shadow-none">
-        {/* <Button variant="text" size="sm" className=" h-10 text-white shadow-none" ripple={false}>
-          Login
-        </Button> */}
+        <Button variant="text" size="sm" onClick={()=>logout()} className=" h-10 text-white shadow-none" ripple={false}>
+          LOGOUT
+        </Button>
         <Typography color="white" className="mr-3">
           {user ? `Hello, ${user}` : null}
         </Typography>
