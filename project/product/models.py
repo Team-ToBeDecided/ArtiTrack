@@ -11,6 +11,10 @@ class Product(models.Model):
     district = models.CharField(max_length=2000)
     address = models.CharField(max_length=2000)
     artisan = models.OneToOneField('userconf.User', on_delete=models.CASCADE)
+    material = models.CharField(max_length=100, null=True, blank=True)
+    craft = models.CharField(max_length=100, null=True, blank=True)
+    measurement = models.CharField(max_length=100, null=True, blank=True)
+    weight = models.CharField(max_length=100, null=True, blank=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
