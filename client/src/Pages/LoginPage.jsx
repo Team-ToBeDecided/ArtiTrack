@@ -3,31 +3,38 @@ import { useContext } from "react";
 import { Button, Input, Typography } from "@material-tailwind/react";
 import image from "../assets/random/loginImage.svg";
 import { AuthContext } from "../components/AuthContext";
+import { Box } from "@mui/material";
 
 export const Login = () => {
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-    const {login} = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
-    const handleEmailChange=(e)=>{
-        setEmail(e.target.value);
-    }
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  }
 
-    const handlePassWordChange=(e)=>{
-        setPassword(e.target.value);
-    }
+  const handlePassWordChange = (e) => {
+    setPassword(e.target.value);
+  }
 
-    const handleLogin=()=>{
-        console.log(email, password);
-        login(email, password)
-    }
+  const handleLogin = () => {
+    console.log(email, password);
+    login(email, password)
+  }
 
   return (
     <>
-      <div className="lg:flex items-center">
-        <div className=" lg:w-1/2 bg-loginBg h-[79vh] flex flex-col items-center justify-center">
-          {/* <img src={image} className=" w-full" /> */}
+      <div className="items-center lg:flex">
+        <Box className=" lg:w-1/2 h-[79vh] flex flex-col items-center justify-center"
+          sx={{
+            backgroundImage: `url(${image})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        >
+          {/* <img src={image} className="w-full " /> */}
           <Typography
             color="white"
             className="text-5xl font-extrabold ml-20 mt-[-80px] self-start"
@@ -45,14 +52,14 @@ export const Login = () => {
             collection of over 80 different craft forms celebrates a heritage of
             some of the world's oldest handicrafts.
           </Typography>
-        </div>
+        </Box>
         <div className="lg:w-1/2 px-56 h-[79vh] flex flex-col gap-5 items-center justify-center">
-            <Typography color="black" className="text-xl self-start">
+          <Typography color="black" className="self-start text-xl">
             LOGIN
-            </Typography>
-            <Typography color="gray" className="text-sm self-start">
-                If you are already registered, please log in.
-            </Typography>
+          </Typography>
+          <Typography color="gray" className="self-start text-sm">
+            If you are already registered, please log in.
+          </Typography>
           <Input
             type="text"
             color="lightBlue"
@@ -68,7 +75,7 @@ export const Login = () => {
             size="regular"
             value={password}
             label="Enter your password"
-            className=" rounded-none"
+            className="rounded-none "
             onChange={handlePassWordChange}
           />
           <Typography color="gray" className="self-start text-xs">
@@ -77,18 +84,18 @@ export const Login = () => {
           <Button
             variant="outlined"
             size="regular"
-            className=" rounded-none w-full"
+            className="w-full rounded-none "
             onClick={handleLogin}
           >
             Login
           </Button>
-          <Typography color="gray" className="text-sm mt-5">
+          <Typography color="gray" className="mt-5 text-sm">
             Create your account and enjoy a new shopping experience.{" "}
-            {/* <span className="text-lightBlue-500 cursor-pointer">Sign up</span> */}
+            {/* <span className="cursor-pointer text-lightBlue-500">Sign up</span> */}
           </Typography>
-          <Button variant="filled" size="regular" className="bg-Charcoal rounded-none w-full">
+          <Button variant="filled" size="regular" className="w-full rounded-none bg-Charcoal">
             Sign Up
-            </Button>
+          </Button>
         </div>
       </div>
     </>
