@@ -126,30 +126,8 @@ export function ConsumerProfilePage() {
         
       </div>
     </div>
-    <div className='p-4 ml-72 w-8/12 text-xs'>
-
-    <p className='font-semibold text-5xl' >Your Past Orders</p>
-    <div className="w-12/12 h-[1px] bg-black"></div>
-    <div className='p-4 text-gray-500 font-light'>
-    <ul className='flex justify-between gap-4'>
-      <li>Order Date</li>
-      <li>Order No.</li>
-      <li>Payment Mode</li>
-      <li>Shipping Address</li>
-    </ul>
-    </div>
-    <div className='p-4 text-gray-900 font-regular'>
-    <ul className='flex justify-between gap-4'>
-      <li>Order Date</li> 
-      <li>Order No.</li>
-      <li>Payment Mode</li>
-      <li>Shipping Address</li>
-    </ul>
-    </div>
-    <div className="w-12/12 h-[1px] bg-black"></div>
-
-    </div>
     <OrderProp/>
+    
     </>
   );
 }
