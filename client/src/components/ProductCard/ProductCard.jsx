@@ -70,15 +70,6 @@ function ProductCard(
                         Shawl
                     </p>
                 </div>
-                <div className='absolute right-0 top-4'>
-                    {/* {product.isNew && */}
-                    <>
-                        <p className='px-6 py-1 font-semibold text-white bg-[#dc747d] font-titleFont'>
-                            For Sale
-                        </p>
-                    </>
-                    {/* } */}
-                </div>
             </div>
         </div>
     );

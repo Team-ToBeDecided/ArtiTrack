@@ -20,14 +20,6 @@ export const Products = () => {
           </Button>
         </div>
         <div className="grid gap-10 mt-10 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-          {/* <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard /> */}
           <ProductCard
             image="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
             description="Product Discription"
@@ -69,9 +61,6 @@ export const Products = () => {
             price="1000"
           />
         </div>
-        {/* <div className="flex flex-row justify-between gap-10 mt-10">
-          
-        </div> */}
       </div>
     </>
   );
