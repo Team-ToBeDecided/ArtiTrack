@@ -7,6 +7,7 @@ import { Login } from "./Pages/LoginPage";
 import { Signup } from "./Pages/Signup";
 import InformationPanel from "./Pages/InformationPanel";
 import { ConsumerProfilePage } from "./Pages/ConsumerProfilePage";
+import ProductCartPage from "./Pages/ProductCartPage";
 
 export const AppRoutes = () => {
     return (
@@ -19,6 +20,7 @@ export const AppRoutes = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/info-panel" element={<InformationPanel />} />
                 <Route path="/consumerProfile" element={<ConsumerProfilePage />} />
+                <Route path="/cart" element={<ProductCartPage />} />
             </Routes>
         </>
     );

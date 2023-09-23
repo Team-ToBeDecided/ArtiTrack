@@ -126,6 +126,9 @@ export function ConsumerProfilePage() {
         
       </div>
     </div>
+    <div className='pt-4 pl-4 pr-4 ml-72 w-8/12 text-xs'>
+    <p className='font-semibold text-5xl' >Your Past Orders</p>
+    </div>
     <OrderProp/>
     
     </>
