@@ -10,14 +10,13 @@
 //   plugins: [],
 // }
 
-
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 module.exports = withMT({
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     screens: {
-      'xs': '300px',
+      'xs': '375px',
       // => @media (min-width: 300px) { ... }
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
@@ -35,6 +34,9 @@ module.exports = withMT({
         Charcoal: "#383330",
         Sandalwood: "#964E15",
       },
+      backgroundImage: {
+        'loginBg': `url("./src/assets/random/loginImage.svg")`,
+      }
       // fontFamily: {
       //   'inter': ['Inter'],
       // },

@@ -25,9 +25,12 @@
 
 #### Register Endpoint: http://127.0.0.1:8000/users/register/
 #### Login Endpoint: http://127.0.0.1:8000/users/login/
+<<<<<<< HEAD
 
 sample login data:
 {
     "email":"test@test.com",
     "password":"tester"
 }
+=======
+>>>>>>> 6a585915840810d6dc953910c4f6e36c43b56548

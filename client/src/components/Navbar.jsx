@@ -81,14 +81,14 @@ export const NavbarDefaut = () => {
           onClick={handleTranslateToUrdu}
           className="w-10 hover:none bg-Charcoal mr-10"
         >
-          اردو
+          اردو   
         </Button>
       </Card>
       <Card className=" bg-Sandalwood h-12 rounded-none flex-row items-center justify-end shadow-none">
         {/* <Button variant="text" size="sm" className=" h-10 text-white shadow-none" ripple={false}>
           Login
         </Button> */}
-        <Typography color="white" className="cursor-pointer px-2">
+        <Typography color="white" onClick={()=>navigate('/login')} className="cursor-pointer px-2">
           Login
         </Typography>
         <Typography color="white">|</Typography>

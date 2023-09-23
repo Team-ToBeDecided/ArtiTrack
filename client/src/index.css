@@ -6,6 +6,35 @@
 html{
   overflow-x: hidden;
 }
+#root{
+  widht:100%;
+}
+:root {
+  /* --font-family: "Poppins", sans-serif; */
+  --dark-blue: #0a1930;
+  --light-blue: #1f93ff;
+
+  --color-white: #fff;
+  --color-dark: #333;
+
+  --color-grey: #eee;
+  --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+  --color-purple: #9d0191;
+  --color-orange: #ff7722;
+
+  --color-primary: #007bff;
+  --color-success: #28a745;
+  --light-pink: #dc747d;
+  --authentic: #77604D;
+  --authentic-font-size: 15.78px;
+  --authentic-letter-spacing: 2.55px;
+  --product-name: 50.72px;
+  --product-name-line-height: 54px;
+  --product-desc: 18px;
+  --product-desc-line-height: 30px;
+}
+
 
 /* .translated-ltr {
   margin-top: -40px;
@@ -23,3 +52,25 @@ html{
 .goog-te-gadget {
   color: transparent !important;
 } */
+.goog-te-gadget{
+  display: none;
+}
+table {
+  display: none;
+  height: 0px;
+}
+
+.skiptranslate{
+  display: none;
+  height: 0px;
+  }
+
+  .translated-ltr , .translated-rtl{
+    position: relative;
+    top: -40px;
+  }
+
+  /* html{
+    position: relative;
+    top: -40px;
+  } */
