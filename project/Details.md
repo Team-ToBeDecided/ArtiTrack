@@ -31,3 +31,5 @@ sample login data:
     "email":"test@test.com",
     "password":"tester"
 }
+
+#### Image Endpoint: http://127.0.0.1:8000/products/productimage/?search=1 (search=1 is the product id)
