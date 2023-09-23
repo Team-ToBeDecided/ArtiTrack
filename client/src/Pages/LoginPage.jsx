@@ -1,27 +1,36 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Button, Input, Typography } from "@material-tailwind/react";
 import image from "../assets/random/loginImage.svg";
 import { AuthContext } from "../components/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+  const { accessToken, userData, userRole, user, login } =
+    useContext(AuthContext);
 
-    const {login} = useContext(AuthContext);
+  const navigate = useNavigate();
 
-    const handleEmailChange=(e)=>{
-        setEmail(e.target.value);
+  useEffect(() => {
+    if (accessToken && userRole === "consumer") {
+      navigate("/products");
     }
+  }, [accessToken,userData]);
 
-    const handlePassWordChange=(e)=>{
-        setPassword(e.target.value);
-    }
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-    const handleLogin=()=>{
-        console.log(email, password);
-        login(email, password)
-    }
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePassWordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleLogin = () => {
+    console.log(email, password);
+    login(email, password);
+  };
 
   return (
     <>
@@ -47,12 +56,12 @@ export const Login = () => {
           </Typography>
         </div>
         <div className="lg:w-1/2 px-56 h-[79vh] flex flex-col gap-5 items-center justify-center">
-            <Typography color="black" className="text-xl self-start">
+          <Typography color="black" className="text-xl self-start">
             LOGIN
-            </Typography>
-            <Typography color="gray" className="text-sm self-start">
-                If you are already registered, please log in.
-            </Typography>
+          </Typography>
+          <Typography color="gray" className="text-sm self-start">
+            If you are already registered, please log in.
+          </Typography>
           <Input
             type="text"
             color="lightBlue"
@@ -72,7 +81,9 @@ export const Login = () => {
             onChange={handlePassWordChange}
           />
           <Typography color="gray" className="self-start text-xs">
-            <span className="cursor-pointer hover:underline">Forgot Password?</span>
+            <span className="cursor-pointer hover:underline">
+              Forgot Password?
+            </span>
           </Typography>
           <Button
             variant="outlined"
@@ -86,9 +97,13 @@ export const Login = () => {
             Create your account and enjoy a new shopping experience.{" "}
             {/* <span className="text-lightBlue-500 cursor-pointer">Sign up</span> */}
           </Typography>
-          <Button variant="filled" size="regular" className="bg-Charcoal rounded-none w-full">
+          <Button
+            variant="filled"
+            size="regular"
+            className="bg-Charcoal rounded-none w-full"
+          >
             Sign Up
-            </Button>
+          </Button>
         </div>
       </div>
     </>
