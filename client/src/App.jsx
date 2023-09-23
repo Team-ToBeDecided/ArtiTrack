@@ -8,12 +8,14 @@ import { Feature } from "./LandingPage/Feature";
 import { LandingPage } from "./Pages/LandingPage";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./Router";
+import GoogleTranslate from "./components/GoogleTranslate";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
+      <GoogleTranslate />
       <BrowserRouter>
       <NavbarDefaut />
         {/* <AuthProvider> */}
