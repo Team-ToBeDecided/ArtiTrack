@@ -3,6 +3,7 @@ import { Box, Typography, Button } from '@mui/material'
 import { useMediaQuery } from '@mui/material'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProductCard from '../components/ProductCard/ProductCard';
 
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
@@ -11,6 +12,8 @@ import CustomButton from '../components/CustomButton/CustomButton'
 
 import Header from '../components/Header/Header';
 import SocialMediaBox from '../components/SocialMediaBox/SocialMediaBox';
+// import { Carousel } from 'react-responsive-carousel'
+import DepartmentSlider from '../components/DepartmentSlider/DepartmentSlider';
 
 const Breakerline = ({ bgcolor, width }) => {
     return (
@@ -54,6 +57,16 @@ const Product2 = ({ item }) => {
     const Images = [
         "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
         "https://1.bp.blogspot.com/-ecJjBSPg2Vo/UUl54ael9iI/AAAAAAAATsA/TvDk_AzUdFE/w1200-h630-p-k-no-nu/Achi+Baat+Koi+Bhi+Kahey+To+Usay+Palu+Say+Band+Lo.jpg",
+        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
+    ]
+    const Images2 = [
+        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
+        "https://1.bp.blogspot.com/-ecJjBSPg2Vo/UUl54ael9iI/AAAAAAAATsA/TvDk_AzUdFE/w1200-h630-p-k-no-nu/Achi+Baat+Koi+Bhi+Kahey+To+Usay+Palu+Say+Band+Lo.jpg",
+        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
+        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
+        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
+        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
+        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
         "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
     ]
     const [counter, setCounter] = useState(1)
@@ -315,9 +328,21 @@ const Product2 = ({ item }) => {
                 </Box>
             </Box>
             <Box height={30} />
-            <Box className="flex justify-center m-20">
+            <Box className="flex flex-col justify-center m-20">
                 <Typography variant='h3'>Similar Products</Typography>
-            </Box>
+                <Box>
+                    <div className="grid gap-10 mt-10 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+                        <ProductCard
+                        />
+                        <ProductCard
+                        />
+                        <ProductCard
+                        />
+                        <ProductCard
+                        />
+                    </div>
+                </Box>
+            </Box >
         </>
     )
 }

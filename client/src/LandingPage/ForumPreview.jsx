@@ -4,14 +4,14 @@ import React from "react";
 export const ForumPreview = () => {
   return (
     <>
-      <div className="bg-Bamboo h-[60vh] flex justify-between">
-        <div className="w-1/2 flex flex-col items-center justify-center">
+      <div className="bg-Bamboo h-[100vh] lg:h-[60vh] flex flex-col lg:flex-row justify-between ">
+        <div className="flex flex-col items-center justify-center w-[100%] lg:w-1/2 ">
           <div className="flex flex-col gap-1">
             <Typography color="white" className="text-md">
               Have a Question?
             </Typography>
             <textarea className="rounded-none w-[32rem] h-36 rounded-br-3xl focus:border-none" />
-            <div className="flex flex-row gap-10 w-96 mt-5">
+            <div className="flex flex-row gap-10 mt-5 w-96">
               <Button className="rounded-none bg-Charcoal" ripple={false}>
                 Ask a Question
               </Button>
@@ -21,7 +21,7 @@ export const ForumPreview = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-start p-10 mr-24 max-w-2xl">
+        <div className="flex flex-col items-start justify-center max-w-2xl p-10 mr-24">
           <Typography color="white" className="text-lg">
             <a href="#" className="hover:underline">
               What materials did you use, and why did you choose them?
