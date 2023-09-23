@@ -81,7 +81,7 @@ export const NavbarDefaut = () => {
           onClick={handleTranslateToUrdu}
           className="w-10 hover:none bg-Charcoal mr-10"
         >
-          اردو
+          اردو   
         </Button>
       </Card>
       <Card className=" bg-Sandalwood h-12 rounded-none flex-row items-center justify-end shadow-none">

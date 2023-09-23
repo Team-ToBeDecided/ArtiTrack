@@ -23,3 +23,25 @@ html{
 .goog-te-gadget {
   color: transparent !important;
 } */
+.goog-te-gadget{
+  display: none;
+}
+table {
+  display: none;
+  height: 0px;
+}
+
+.skiptranslate{
+  display: none;
+  height: 0px;
+  }
+
+  .translated-ltr , .translated-rtl{
+    position: relative;
+    top: -40px;
+  }
+
+  /* html{
+    position: relative;
+    top: -40px;
+  } */
