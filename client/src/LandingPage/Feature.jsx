@@ -1,11 +1,18 @@
 import { Button, Typography, Carousel } from "@material-tailwind/react";
 import React from "react";
+import { Box } from "@mui/material";
+import landingBg from '../assets/random/landingBg.svg'
 
 export const Feature = () => {
   return (
     <>
       <div className="items-center lg:flex">
-        <div className="lg:w-1/2 sm:w-full h-[90vh] bg-Bamboo flex flex-col justify-center items-center lg:justify-start md:flex-col sm:flex-col sm:justify-center lg:p-36 md:p-10">
+        <Box sx={{
+          backgroundColor:'#BD7A32',
+          backgroundImage: `url(${landingBg})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }} className="lg:w-1/2 sm:w-full h-[90vh] flex flex-col justify-center items-center lg:justify-start md:flex-col sm:flex-col sm:justify-center lg:p-36 md:p-10">
           <div className="flex flex-col lg:gap-5 sm:gap-10 lg:mt-10 xs:gap-10 xs:p-4 lg:flex-col lg:items-start sm:justify-center">
             {/* <h1 className="text-5xl text-white">Feature</h1> */}
             <Typography color="white" className="text-5xl font-semibold">
@@ -33,7 +40,7 @@ export const Feature = () => {
               Shop Now
             </Button>
           </div>
-        </div>
+        </Box>
         <div className="flex items-center justify-center m-5 lg:w-1/2 sm:w-full">
           <div className="h-[70vh] w-96">
             <CarouselCustomNavigation />
