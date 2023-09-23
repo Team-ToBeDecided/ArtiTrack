@@ -5,8 +5,10 @@ import {
     HeartIcon,
     ShoppingCartIcon,
   } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 export const NavbarDefaut = () => {
+  const navigate= useNavigate();
   return (
     <>
       <Card className=" bg-Charcoal h-8 rounded-none items-center flex-row justify-end">
@@ -38,7 +40,7 @@ export const NavbarDefaut = () => {
         <Typography color="white">
           |
         </Typography>
-        <Typography color="white" className="cursor-pointer px-2 mr-3">
+        <Typography color="white" onClick={()=> navigate('/masti')} className="cursor-pointer px-2 mr-3">
             SignUp
         </Typography>
         <MagnifyingGlassIcon className="h-6 w-6 text-white mr-5 cursor-pointer" />

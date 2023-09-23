@@ -5,12 +5,12 @@ import { Products } from "../LandingPage/Products";
 import { ForumPreview } from "../LandingPage/ForumPreview";
 
 export const LandingPage = () => {
-    return(
-        <>
-        <NavbarDefaut />
-        <Feature  />
-        <Products   />
-        <ForumPreview />
-        </>
-    )
+  return (
+    <>
+      {/* <NavbarDefaut /> */}
+      <Feature />
+      <Products />
+      <ForumPreview />
+    </>
+  );
 };
