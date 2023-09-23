@@ -7,7 +7,7 @@ export const Products = () => {
     <>
       <div className="px-16 py-16">
         <div className="flex flex-row justify-between">
-          <Typography color="Black" className="text-3xl font-semibold">
+          <Typography color="Black" className="text-3xl font-heading semibold font-">
             Trending & New
           </Typography>
           <Button

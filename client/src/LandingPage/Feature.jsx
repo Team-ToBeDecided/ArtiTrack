@@ -16,15 +16,15 @@ export const Feature = () => {
         }} className="lg:w-1/2 sm:w-full h-[90vh] flex flex-col justify-center items-center lg:justify-start md:flex-col sm:flex-col sm:justify-center lg:p-36 md:p-10">
           <div className="flex flex-col lg:gap-5 sm:gap-10 lg:mt-10 xs:gap-10 xs:p-4 lg:flex-col lg:items-start sm:justify-center">
             {/* <h1 className="text-5xl text-white">Feature</h1> */}
-            <Typography color="white" className="text-5xl font-semibold">
+            <Typography color="white" className="text-5xl font-semibold font-heading ">
               Welcome to Our
-              <Typography color="white" className="text-5xl font-extrabold">
+              <Typography color="white" className="text-5xl font-extrabold font-heading">
                 ODOP Platform
               </Typography>
             </Typography>
             <Typography
               color="white"
-              className="max-w-lg font-light text-md"
+              className="max-w-lg font-light font-body text-md"
             >
               Identifying unique products from each district, promoting local
               craftsmanship, and preserving cultural heritage. Providing artisans
