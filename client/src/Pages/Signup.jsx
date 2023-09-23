@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import { Button, Input, Typography } from "@material-tailwind/react";
 import image from "../assets/random/loginImage.svg";
@@ -15,13 +15,19 @@ export const Signup = () => {
   const [address, setAddress] = React.useState("");
   const [gender, setGender] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [gstin, setGstin] = React.useState("999969");
+  const [gstin, setGstin] = React.useState("");
   const [district, setDistrict] = React.useState("");
-  const [craft, setCraft] = React.useState(null)
+  const [craft, setCraft] = React.useState(null);
 
   const [userType, setUserType] = React.useState("Consumer");
 
-  const { login } = useContext(AuthContext);
+  const { login, accessToken, userData  } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (accessToken !== null) {
+        navigate("/products");
+        }
+    }, [accessToken, userData]);
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -78,8 +84,8 @@ export const Signup = () => {
       email: email,
       first_name: firstName,
       last_name: lastName,
-    //   is_active: true,
-    //   is_staff: false,
+      //   is_active: true,
+      //   is_staff: false,
       role:
         userType === "Consumer"
           ? "consumer"
@@ -95,14 +101,15 @@ export const Signup = () => {
       gstin: gstin,
     };
     console.log(userData);
-    axios.post(BASE_URL+"users/register/", userData).then(
-        (response) => {
-            console.log(response);
-        },
-        (error) => {
-            console.log(error);
-        }
-        );
+    axios.post(BASE_URL + "users/register/", userData).then(
+      (response) => {
+        console.log(response);
+        login(email, password);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   return (
