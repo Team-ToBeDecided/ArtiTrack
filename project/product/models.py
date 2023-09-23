@@ -7,7 +7,6 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.FloatField()
     stock = models.IntegerField()
-    image_url = models.CharField(max_length=2000)
     description = models.CharField(max_length=2000)
     district = models.CharField(max_length=2000)
     address = models.CharField(max_length=2000)
@@ -15,6 +14,14 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+class ProductImage(models.Model):
+    id = models.AutoField(primary_key=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_images/')
+
+    def __str__(self):
+        return self.product.name
 
 class Cart(models.Model):
     id = models.AutoField(primary_key=True)

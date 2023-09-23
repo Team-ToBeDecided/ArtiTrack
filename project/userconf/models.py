@@ -31,6 +31,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(max_length=10)
     phone_number = models.CharField(max_length=15)
     address = models.CharField(max_length=100)
+    district = models.CharField(max_length=30, null=True, blank=True)
     craft = models.CharField(max_length=30, default='none')
     description = models.CharField(max_length=200, default='none')
     profile_image = models.ImageField(upload_to='profile_image', blank=True, null=True)
@@ -42,4 +43,4 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     def __str__(self):
-        return self.name
+        return self.email
