@@ -1,5 +1,4 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Button, Input, Typography } from "@material-tailwind/react";
 import image from "../assets/random/loginImage.svg";
 import { AuthContext } from "../components/AuthContext";
@@ -79,7 +78,9 @@ export const Login = () => {
             onChange={handlePassWordChange}
           />
           <Typography color="gray" className="self-start text-xs">
-            <span className="cursor-pointer hover:underline">Forgot Password?</span>
+            <span className="cursor-pointer hover:underline">
+              Forgot Password?
+            </span>
           </Typography>
           <Button
             variant="outlined"
