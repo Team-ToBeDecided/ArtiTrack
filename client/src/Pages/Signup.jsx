@@ -6,6 +6,7 @@ import { AuthContext } from "../components/AuthContext";
 import axios from "axios";
 import { BASE_URL } from "../constants/basUrl";
 import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
   const [email, setEmail] = React.useState("");
@@ -23,6 +24,8 @@ export const Signup = () => {
   const [userType, setUserType] = React.useState("Consumer");
 
   const { login, accessToken, userData  } = useContext(AuthContext);
+
+  const { navigate } = useNavigate();
 
   useEffect(() => {
     if (accessToken !== null) {

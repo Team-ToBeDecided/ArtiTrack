@@ -50,10 +50,10 @@ export const B2BDashBoard = () => {
     ];
     return (
         <>
-            <div className="flex justify-center">
+            <div className="flex p-16 justify-center">
                 <Header text="DashBoard" />
             </div>
-            <div className="flex justify-center gap-10 mt-5">
+            <div className="ml-9 flex justify-center gap-10 mt-5">
                 <Box
                     gridColumn="span 3"
                     // display="flex"
@@ -63,9 +63,11 @@ export const B2BDashBoard = () => {
                 >
                     <Stats
                         title="xxx"
+                        fontSize="text-xl"
+                        style={{ padding: '2px' }}
                         subtitle="Total Invoices Generated "
                         progress="0.75"
-                        increase="69"
+                        increase="&nbsp; 349"
                         icon={<DocumentTextIcon strokeWidth={2} className="h-6 w-6" />}
                     />
                 </Box>
@@ -78,9 +80,9 @@ export const B2BDashBoard = () => {
                 >
                     <Stats
                         title="xxx"
-                        subtitle="Total Number of Students"
+                        subtitle="Number of Consumers"
                         progress='0.5'
-                        increase="^^^"
+                        increase="&nbsp; 47"
                         icon={<UserIcon strokeWidth={2} className="h-6 w-6" />}
                     />
                 </Box>
@@ -93,9 +95,9 @@ export const B2BDashBoard = () => {
                 >
                     <Stats
                         title="xxx"
-                        subtitle="Total Number of Schools"
+                        subtitle="Artisans in Community"
                         progress="0.75"
-                        increase="&nbsp;^^^"
+                        increase="&nbsp; 43"
                         icon={
                             <BuildingStorefrontIcon strokeWidth={2} className="h-6 w-6" />
                         }
@@ -112,7 +114,7 @@ export const B2BDashBoard = () => {
                         title="xxx"
                         subtitle="Total Revenue Generated"
                         progress="0.75"
-                        increase="^^^"
+                        increase="&nbsp; 43,000/-"
                         icon={
                             <CurrencyRupeeIcon strokeWidth={2} className="h-6 w-6" />
                         }
@@ -120,7 +122,7 @@ export const B2BDashBoard = () => {
                 </Box>
             </div>
             <div className="flex">
-                <div className="flex justify-center pt-0 p-10 w-8/12 mt-5">
+                <div className="flex justify-center pt-0 p-16 w-8/12 mt-5">
                     <MembersTable />
                 </div>
                 <div className=" w-full xl:w-4/12 items-center my-10 p-4">
@@ -201,7 +203,7 @@ const TABLE_ROWS = [
 
 export function MembersTable() {
     return (
-        <Card className="h-full w-full rounded-4xl">
+        <Card className=" pl-16 pr-16 pb-16 h-full w-full rounded-4xl">
             <CardBody className="overflow-scroll px-0">
                 <table className="w-full min-w-max table-auto text-left">
                     <thead>

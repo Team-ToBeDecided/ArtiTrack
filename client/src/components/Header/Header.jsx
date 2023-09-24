@@ -6,7 +6,7 @@ const Header = ({ text }) => {
             <div className='text-5xl font-bold'>
                 {text}
             </div>
-            <div className='w-24 h-[1px] bg-black' />
+            <div className='w-64 h-[2px] bg-black' />
         </div>
     )
 }

@@ -1,8 +1,9 @@
 .threespan{
     transition: all 0.3s;
+    cursor: pointer;
     /* background: #FFE5D6; */
 }
 
 .threespan:hover{
-    transform: scale(1.04);
+    transform: scale(1.01);
 }
