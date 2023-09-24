@@ -10,14 +10,14 @@ import { Typography, useMediaQuery } from '@mui/material';
 
 export function ProductCard(
     { product }
-    ) {
+) {
     // const dispatch = useDispatch();
     console.log(product)
     const navigate = useNavigate();
 
     const [img, setImg] = React.useState('')
 
-    const getImage =async () => {
+    const getImage = async () => {
         const response = await axios.get(BASE_URL + `/products/productimage/?search=${product.id}`)
         console.log(response.data)
         setImg(response.data[0].image)
@@ -30,7 +30,7 @@ export function ProductCard(
     const md = useMediaQuery("(min-width:1024px)")
 
     return (
-        <div className={`relative group ${md ? 'w-full' : 'w-[100%] justify-center align-center'}`}>
+        <div onClick={() => navigate(`/products/${product.id}`)} className={`relative group ${md ? 'w-full' : 'w-[100%] justify-center align-center'}`}>
             <div
                 // onClick={handleDetails} 
                 className="w-full h-[500px] overflow-hidden cursor-pointer">

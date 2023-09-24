@@ -57,9 +57,10 @@ export const NavbarDefaut = () => {
   return (
     <>
       {/* <GoogleTranslate language={lang} /> */}
-      <Card className=" bg-Charcoal h-8 rounded-none items-center flex-row justify-end">
+      <Card className="flex-row items-center justify-end h-8 rounded-none bg-Charcoal">
         {/* <h1>Navbar</h1> */}
         {/* <Typography className="px-5" color="white">ENG | हिंदी | اردو</Typography> */}
+
         <Button
           variant="filled"
           onClick={handleTranslateToEnglish}
@@ -83,25 +84,84 @@ export const NavbarDefaut = () => {
         <Button
           variant="filled"
           onClick={handleTranslateToUrdu}
-          className="w-10 hover:none bg-Charcoal mr-10"
+          className="w-10 mr-10 hover:none bg-Charcoal"
         >
           اردو
         </Button>
       </Card>
-      <Card className=" bg-Sandalwood h-12 rounded-none flex-row items-center justify-end shadow-none">
+      <Card className="flex-row items-center justify-end h-12 rounded-none shadow-none bg-Sandalwood">
+        {
+          userRole === "wholesaler" ? (
+            <Typography
+              variant="text"
+              onClick={() => navigate("/b2bdashboard")}
+              className="mx-5 text-white cursor-pointer font-heading text-md"
+              ripple={false}
+            >Dashboard</Typography>
+          ) : (
+            null
+          )
+        }
+        {
+          userRole === "artisan" ? (
+            <Typography
+              variant="text"
+              onClick={() => navigate("/artisanProfile")}
+              className="mx-3 text-white cursor-pointer font-heading text-md"
+              ripple={false}
+            >Profile</Typography>
+          ) : (
+            null
+          )
+        }
+        {
+          userRole === "artisan" ? (
+            <Typography
+              variant="text"
+              onClick={() => navigate("/informationPanel")}
+              className="mx-3 text-white cursor-pointer font-heading text-md"
+              ripple={false}
+            >Information Panel</Typography>
+          ) : (
+            null
+          )
+        }
+        {
+          userRole === "artisan" ? (
+            <Typography
+              variant="text"
+              onClick={() => navigate("/productUpload")}
+              className="mx-3 text-white cursor-pointer font-heading text-md"
+              ripple={false}
+            >Add Product</Typography>
+          ) : (
+            null
+          )
+        }
+        {
+          userRole === "consumer" ? (
+            <Typography
+              variant="text"
+              onClick={() => navigate("/artisanProfile")}
+              className="mx-3 text-white cursor-pointer font-heading text-md"
+              ripple={false}
+            >Profile</Typography>
+          ) : (
+            null
+          )
+        }
         {accessToken ? (
-          <Button
+          <Typography
             variant="text"
-            size="sm"
             onClick={() => logout()}
-            className=" h-10 text-white shadow-none"
+            className="mx-5 text-white cursor-pointer font-heading text-md"
             ripple={false}
           >
-            LOGOUT
-          </Button>
+            Logout
+          </Typography>
         ) : null}
 
-        <Typography color="white" className="mr-3">
+        <Typography color="white" className="mr-3 font-heading">
           {user ? `Hello, ${user}` : null}
         </Typography>
         {accessToken ? null : (
@@ -109,7 +169,7 @@ export const NavbarDefaut = () => {
             <Typography
               color="white"
               onClick={() => navigate("/login")}
-              className="cursor-pointer px-2"
+              className="px-2 cursor-pointer"
             >
               Login
             </Typography>
@@ -117,15 +177,15 @@ export const NavbarDefaut = () => {
             <Typography
               color="white"
               onClick={() => navigate("/signup")}
-              className="cursor-pointer px-2 mr-3"
+              className="px-2 mr-3 cursor-pointer"
             >
               SignUp
             </Typography>
           </>
         )}
-        <MagnifyingGlassIcon className="h-6 w-6 text-white mr-5 cursor-pointer" />
-        <HeartIcon className="h-6 w-6 text-white mr-5 cursor-pointer" />
-        <ShoppingCartIcon className="h-6 w-6 text-white mr-10 cursor-pointer" />
+        <MagnifyingGlassIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
+        <HeartIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
+        <ShoppingCartIcon className="w-6 h-6 mr-10 text-white cursor-pointer" />
       </Card>
       {/* <div id="google_translate_element">
         </div> */}

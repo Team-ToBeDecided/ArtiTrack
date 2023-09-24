@@ -114,6 +114,7 @@ export const Login = () => {
             variant="filled"
             size="regular"
             className="w-full rounded-none bg-Charcoal"
+            onClick={()=>navigate('/signup')}
           >
             Sign Up
           </Button>

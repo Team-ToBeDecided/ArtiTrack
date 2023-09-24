@@ -60,33 +60,68 @@ const DetailType = ({ name, value }) => {
     )
 }
 
-const Product2 = () => {
-    const [product, setProduct] = useState({});
-    const { id } = useParams();
+const ProductImage = ({ product }) => {
     const [img, setImg] = useState([])
-    const getImage = async () => {
-        const response = await axios.get(BASE_URL + `/products/productimage/?search=${product.id}`)
-        console.log(response.data)
-        const images = response.data.map((image) => image.image)
-        setImg(images)
-        console.log(img)
-    }
 
-    const getProducts = async () => {
+    const getImage = async () => {
+        const response = await axios.get(BASE_URL + `/products/productimage/?search=${product.id}`);
+        console.log(response.data);
+        setImg(response.data);
+    };
+
+    useEffect(() => {
+        getImage();
+    }, [img])
+
+    return (
+        <Box className="flex flex-col w-full gap-10 m-0 lg:ml-20">
+            <Box>
+                {img && img[0] && (
+                    <img src={img[0].image} className='w-[400px] h-[600px]' alt="" />
+                )}
+            </Box>
+            <Box className="flex gap-10">
+                {img &&
+                    img.map((image, index) => (
+                        <Box className="flex" key={index}>
+                            {index !== 0 && image && image.image && (
+                                <img src={image.image} className='w-[150px] h-[200px]' alt="" srcSet="" />
+                            )}
+                        </Box>
+                    ))}
+            </Box>
+        </Box>
+    );
+}
+
+const Product2 = () => {
+    const [product, setProduct] = useState([]);
+    const [products, setProducts] = useState([]);
+    const { id } = useParams();
+
+    const getProduct = async () => {
         try {
-            console.log('id:', id);
             const response = await axios.get(`${BASE_URL}/products/product/${id}`);
             setProduct(response.data);
         } catch (error) {
-            console.error('Error fetching products:', error);
+            console.error('Error fetching products:', error)
+        }
+    };
+
+    const getProducts = async () => {
+        try {
+            const response = await axios.get(`${BASE_URL}/products/product`);
+            setProducts(response.data);
+        } catch (error) {
+            console.error('Error fetching products:', error)
         }
     };
 
     useEffect(() => {
+        getProduct();
         getProducts();
-        getImage();
-    }, [id]);
-    
+    }, [product, products]);
+
     const [counter, setCounter] = useState(1)
     const [currentImg, setCurrentImg] = useState(0)
     const stock = 20
@@ -115,11 +150,10 @@ const Product2 = () => {
                     width: '100%',
                     display: 'flex',
                     flexDirection: md ? 'row' : 'column',
-                    alignItems: md ? 'flex-start' : 'center',
-                    gap: '20px',
-                    justifyContent: 'center',
+                    justifyContent: md ? 'flex-start' : 'center',
+                    gap: '10px',
+                    // justifyContent: 'evenly',
                 }}
-                className="m-0 md:m-20"
             >
                 <Box
                     sx={{
@@ -127,43 +161,13 @@ const Product2 = () => {
                         // flexDirection: md ? 'row' : 'column-reverse',
                         flexDirection: 'column-reverse',
                         alignItems: 'center',
-                        gap: '20px',
+                        gap: '10px',
                     }}
                 >
                     <Box width={30} />
-                    <Box
-                        sx={{
-                            position: 'relative',
-                            height: '100%',
-                            width: '100%'
-                        }}
-                    >
-                        <Box className="flex justify-center">
-                            <img src={img[currentImg]} alt="" srcSet=""
-                                // className={`${md ? 'min-w-[600px]' : 'w-[100%]'} ${md ? 'h-[100vh]' : 'h-[70vh]'}`}
-                                className='object-cover h-[80vh] w-[90%]'
-                            />
-                        </Box>
-                        <Box>
-                            {
-                                img.map((image, index) => (
-                                    <>
-                                        {
-                                            index == 1 && (
-                                                <div className="">
-                                                    <img src={image} alt="" srcSet=""
-                                                        className='object-cover h-[80vh] w-[90%]'
-                                                    />
-                                                </div>
-                                            )
-                                        }
-                                    </>
-                                ))
-                            }
-                        </Box>
-                    </Box>
                 </Box>
                 <Box width={50} />
+                <ProductImage product={product} />
                 <Box className="flex justify-center">
                     <Box
                         sx={{
@@ -172,9 +176,8 @@ const Product2 = () => {
                             flexDirection: 'column',
                             justifyContent: 'center',
                             gap: '30px',
-
+                            paddingRight: md ? '40px' : 0
                         }}
-                    // className="items-center lg:items-start"
                     >
                         <Typography
                             sx={{
@@ -187,7 +190,7 @@ const Product2 = () => {
                         >
                             | AUTHENTIC CRAFT. CREATED IN INDIA.
                         </Typography>
-                        <Box className="flex w-full">
+                        <Box className="flex w-[100%]">
                             <Typography
                                 sx={{
                                     fontSize: 'var(--product-name)',
@@ -346,9 +349,9 @@ const Product2 = () => {
                 }} variant='h3'>Similar Products</Typography>
                 <Box>
                     <div className="grid gap-10 mt-10 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-                        {/* {product.map((product) => (
+                        {products.map((product) => (
                             <ProductCard product={product} />
-                        ))} */}
+                        ))}
                     </div>
                 </Box>
             </Box >

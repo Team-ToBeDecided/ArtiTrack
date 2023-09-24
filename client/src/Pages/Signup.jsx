@@ -6,7 +6,7 @@ import { AuthContext } from "../components/AuthContext";
 import axios from "axios";
 import { BASE_URL } from "../constants/basUrl";
 import { Box } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 export const Signup = () => {
   const [email, setEmail] = React.useState("");
@@ -23,15 +23,23 @@ export const Signup = () => {
 
   const [userType, setUserType] = React.useState("Consumer");
 
-  const { login, accessToken, userData  } = useContext(AuthContext);
+  const { login, accessToken, userData } = useContext(AuthContext);
 
-  const { navigate } = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
+
     if (accessToken !== null) {
-        navigate("/products");
-        }
-    }, [accessToken, userData]);
+      if (userRole === 'consumer') {
+        navigate('/products');
+      } else if (userRole === 'artisan') {
+        navigate('/artisanProfile');
+      }
+      else if (userRole === 'wholesaler') {
+        navigate('/b2bdashboard');
+      }
+    }
+  }, [accessToken, userData]);
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -94,8 +102,8 @@ export const Signup = () => {
         userType === "Consumer"
           ? "consumer"
           : userType === "WholeSale Consumer"
-          ? "wholesaler"
-          : "artisan",
+            ? "wholesaler"
+            : "artisan",
       gender: gender,
       phone_number: phoneNo,
       address: address,
