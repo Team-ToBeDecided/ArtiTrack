@@ -90,77 +90,77 @@ export const NavbarDefaut = () => {
         </Button>
       </Card>
       <Card className="flex-row items-center justify-end h-12 rounded-none shadow-none bg-Sandalwood">
-        {
-          userRole === "wholesaler" ? (
+          {
+            userRole === "wholesaler" ? (
+              <Typography
+                variant="text"
+                onClick={() => navigate("/b2bdashboard")}
+                className="mx-5 text-white cursor-pointer font-heading text-md"
+                ripple={false}
+              >Dashboard</Typography>
+            ) : (
+              null
+            )
+          }
+          {
+            userRole === "artisan" ? (
+              <Typography
+                variant="text"
+                onClick={() => navigate("/artisanProfile")}
+                className="mx-3 text-white cursor-pointer font-heading text-md"
+                ripple={false}
+              >Profile</Typography>
+            ) : (
+              null
+            )
+          }
+          {
+            userRole === "artisan" ? (
+              <Typography
+                variant="text"
+                onClick={() => navigate("/informationPanel")}
+                className="mx-3 text-white cursor-pointer font-heading text-md"
+                ripple={false}
+              >Information Panel</Typography>
+            ) : (
+              null
+            )
+          }
+          {
+            userRole === "artisan" ? (
+              <Typography
+                variant="text"
+                onClick={() => navigate("/productUpload")}
+                className="mx-3 text-white cursor-pointer font-heading text-md"
+                ripple={false}
+              >Add Product</Typography>
+            ) : (
+              null
+            )
+          }
+          {
+            userRole === "consumer" ? (
+              <Typography
+                variant="text"
+                onClick={() => navigate("/artisanProfile")}
+                className="mx-3 text-white cursor-pointer font-heading text-md"
+                ripple={false}
+              >Profile</Typography>
+            ) : (
+              null
+            )
+          }
+          {accessToken ? (
             <Typography
               variant="text"
-              onClick={() => navigate("/b2bdashboard")}
+              onClick={() => logout()}
               className="mx-5 text-white cursor-pointer font-heading text-md"
               ripple={false}
-            >Dashboard</Typography>
-          ) : (
-            null
-          )
-        }
-        {
-          userRole === "artisan" ? (
-            <Typography
-              variant="text"
-              onClick={() => navigate("/artisanProfile")}
-              className="mx-3 text-white cursor-pointer font-heading text-md"
-              ripple={false}
-            >Profile</Typography>
-          ) : (
-            null
-          )
-        }
-        {
-          userRole === "artisan" ? (
-            <Typography
-              variant="text"
-              onClick={() => navigate("/informationPanel")}
-              className="mx-3 text-white cursor-pointer font-heading text-md"
-              ripple={false}
-            >Information Panel</Typography>
-          ) : (
-            null
-          )
-        }
-        {
-          userRole === "artisan" ? (
-            <Typography
-              variant="text"
-              onClick={() => navigate("/productUpload")}
-              className="mx-3 text-white cursor-pointer font-heading text-md"
-              ripple={false}
-            >Add Product</Typography>
-          ) : (
-            null
-          )
-        }
-        {
-          userRole === "consumer" ? (
-            <Typography
-              variant="text"
-              onClick={() => navigate("/artisanProfile")}
-              className="mx-3 text-white cursor-pointer font-heading text-md"
-              ripple={false}
-            >Profile</Typography>
-          ) : (
-            null
-          )
-        }
-        {accessToken ? (
-          <Typography
-            variant="text"
-            onClick={() => logout()}
-            className="mx-5 text-white cursor-pointer font-heading text-md"
-            ripple={false}
-          >
-            Logout
-          </Typography>
-        ) : null}
-
+            >
+              Logout
+            </Typography>
+          ) : null}
+        
         <Typography color="white" className="mr-3 font-heading">
           {user ? `Hello, ${user}` : null}
         </Typography>
@@ -182,6 +182,7 @@ export const NavbarDefaut = () => {
               SignUp
             </Typography>
           </>
+
         )}
         <MagnifyingGlassIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
         <HeartIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
