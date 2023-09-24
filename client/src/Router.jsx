@@ -19,7 +19,7 @@ export const AppRoutes = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/products" element={<Products />} />
-                <Route path="/products/desc" element={<Product2 />} />
+                <Route path="/products/:id" element={<Product2 />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/productUpload" element={<ProductUpload />} />
                 {/* <Route path="/informationPanel" element={<InfoPan />} /> */}

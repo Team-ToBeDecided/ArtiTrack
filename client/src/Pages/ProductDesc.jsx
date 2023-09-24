@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Typography, Button } from '@mui/material'
 import { useMediaQuery } from '@mui/material'
+import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProductCard from '../components/ProductCard/ProductCard';
@@ -14,6 +15,10 @@ import Header from '../components/Header/Header';
 import SocialMediaBox from '../components/SocialMediaBox/SocialMediaBox';
 // import { Carousel } from 'react-responsive-carousel'
 import DepartmentSlider from '../components/DepartmentSlider/DepartmentSlider';
+
+import axios from 'axios'
+import { BASE_URL } from '../constants/basUrl';
+
 
 const Breakerline = ({ bgcolor, width }) => {
     return (
@@ -55,29 +60,36 @@ const DetailType = ({ name, value }) => {
     )
 }
 
-const Product2 = ({ item }) => {
-    const Images = [
-        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
-        "https://1.bp.blogspot.com/-ecJjBSPg2Vo/UUl54ael9iI/AAAAAAAATsA/TvDk_AzUdFE/w1200-h630-p-k-no-nu/Achi+Baat+Koi+Bhi+Kahey+To+Usay+Palu+Say+Band+Lo.jpg",
-        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
-    ]
-    const Images2 = [
-        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
-        "https://1.bp.blogspot.com/-ecJjBSPg2Vo/UUl54ael9iI/AAAAAAAATsA/TvDk_AzUdFE/w1200-h630-p-k-no-nu/Achi+Baat+Koi+Bhi+Kahey+To+Usay+Palu+Say+Band+Lo.jpg",
-        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
-        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
-        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
-        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
-        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
-        "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8f",
-    ]
+const Product2 = () => {
+    const [product, setProduct] = useState({});
+    const { id } = useParams();
+    const [img, setImg] = useState([])
+    const getImage = async () => {
+        const response = await axios.get(BASE_URL + `/products/productimage/?search=${product.id}`)
+        console.log(response.data)
+        const images = response.data.map((image) => image.image)
+        setImg(images)
+        console.log(img)
+    }
+
+    const getProducts = async () => {
+        try {
+            console.log('id:', id);
+            const response = await axios.get(`${BASE_URL}/products/product/${id}`);
+            setProduct(response.data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    };
+
+    useEffect(() => {
+        getProducts();
+        getImage();
+    }, [id]);
+    
     const [counter, setCounter] = useState(1)
     const [currentImg, setCurrentImg] = useState(0)
     const stock = 20
-    // useEffect(() => {
-    //     setDetails(location.state.item)
-    // }, [])
-
     const handleMinus = () => {
         if (counter >= 2) {
             setCounter((prev) => prev - 1)
@@ -121,42 +133,33 @@ const Product2 = ({ item }) => {
                     <Box width={30} />
                     <Box
                         sx={{
-                            display: 'flex',
-                            // flexDirection: md ? 'column' : 'row',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            gap: '15px'
-                        }}
-                    >
-                        {Images.map((image, index) => (
-                            <Box
-                                sx={{
-                                    cursor: 'pointer',
-                                    opacity: '0.5'
-                                }}
-                                key={index}
-                            >
-                                <img
-                                    className={`${md ? 'max-w-[150px] h-[150px]' : 'w-[150px] h-[150px]'} flex-wrap`}
-                                    onClick={() => setCurrentImg(index)} // Fix this line
-                                    src={image}
-                                    alt={'Image'}
-                                />
-                            </Box>
-                        ))}
-                    </Box>
-                    <Box
-                        sx={{
                             position: 'relative',
                             height: '100%',
                             width: '100%'
                         }}
                     >
                         <Box className="flex justify-center">
-                            <img src={Images[currentImg]}
+                            <img src={img[currentImg]} alt="" srcSet=""
                                 // className={`${md ? 'min-w-[600px]' : 'w-[100%]'} ${md ? 'h-[100vh]' : 'h-[70vh]'}`}
                                 className='object-cover h-[80vh] w-[90%]'
                             />
+                        </Box>
+                        <Box>
+                            {
+                                img.map((image, index) => (
+                                    <>
+                                        {
+                                            index == 1 && (
+                                                <div className="">
+                                                    <img src={image} alt="" srcSet=""
+                                                        className='object-cover h-[80vh] w-[90%]'
+                                                    />
+                                                </div>
+                                            )
+                                        }
+                                    </>
+                                ))
+                            }
                         </Box>
                     </Box>
                 </Box>
@@ -184,7 +187,7 @@ const Product2 = ({ item }) => {
                         >
                             | AUTHENTIC CRAFT. CREATED IN INDIA.
                         </Typography>
-                        <Box className="flex justify-center w-full">
+                        <Box className="flex w-full">
                             <Typography
                                 sx={{
                                     fontSize: 'var(--product-name)',
@@ -194,7 +197,7 @@ const Product2 = ({ item }) => {
                                     fontFamily: 'var(--heading)'
                                 }}
                             >
-                                Kalighat Painting With Mount - The Couple (25" x 17")
+                                {product.name}
                             </Typography>
                         </Box>
                         <Typography
@@ -206,7 +209,6 @@ const Product2 = ({ item }) => {
                                 letterSpacing: 'var(--authentic-letter-spacing)'
                             }}
                         >
-                            {/* {details.Name} */}
                             PRODUCT CODE: SNYKG9A
                         </Typography>
                         <Typography
@@ -218,7 +220,7 @@ const Product2 = ({ item }) => {
                                 fontFamily: 'var(--body)'
                             }}
                         >
-                            A beautifully stylised and relatively contemporary art form. Kalighat Painting evolved as a unique painting style in the rapidly urbanizing cityscape of 19th-century Kolkata, West Bengal. The style of these paintings is characterized by their bold sweeping brush lines, bold colours and a simplification of forms.
+                            {product.description}
                         </Typography>
                         <Typography
                             sx={{
@@ -344,14 +346,9 @@ const Product2 = ({ item }) => {
                 }} variant='h3'>Similar Products</Typography>
                 <Box>
                     <div className="grid gap-10 mt-10 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
-                        <ProductCard
-                        />
-                        <ProductCard
-                        />
-                        <ProductCard
-                        />
-                        <ProductCard
-                        />
+                        {/* {product.map((product) => (
+                            <ProductCard product={product} />
+                        ))} */}
                     </div>
                 </Box>
             </Box >

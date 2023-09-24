@@ -11,13 +11,19 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
-  const { login, accessToken, userType } = useContext(AuthContext);
+  const { login, accessToken, userRole } = useContext(AuthContext);
 
   useEffect(() => {
-    if (accessToken !== null || userType === "consumer") {
-      navigate("/products");
+    console.log('accessToken:', accessToken);
+    console.log('userRole:', userRole);
+    if (accessToken !== null) {
+      if (userRole === 'consumer') {
+        navigate('/products');
+      } else if (userRole === 'artisan') { 
+        navigate('/artisanProfile'); 
+      }
     }
-  }, [accessToken, userType]);
+  }, [accessToken, userRole, navigate]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
