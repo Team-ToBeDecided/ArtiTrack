@@ -293,6 +293,7 @@ const ProductUpload = () => {
                     },
                 }).then((response) => {
                     console.log(response.data);
+                    console.log(response.data.image);
                     setImgUrl(response.data.image);
                 }).catch((error) => {
                     console.log(error);
@@ -333,7 +334,7 @@ const ProductUpload = () => {
     const publishToFacebook = async () => {
         const pageId = "100669336396193";
         const message = description;
-        const imageUrl = "http://144.126.253.88:8000/media/product_images/linkedinBG_LqGHVlz.jpg";
+        const imageUrl = imgUrl;
         const response = await createPostWithImage(pageId, message, imageUrl);
         console.log(response);
     }
