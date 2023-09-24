@@ -157,7 +157,7 @@ const TABLE_ROWS = [
     {
         img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
         name: "Sharanya Chaudhuri",
-        email: "sharany@chaudhuri.com",
+        email: "sharany.chaudhuri@gmail.com",
         job: "Srinagar",
         org: "HandiCrafts",
         online: true,
@@ -166,7 +166,7 @@ const TABLE_ROWS = [
     {
         img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
         name: "Aarya Tiwari",
-        email: "aarya@tiwari.com",
+        email: "aarya.tiwari@gmail.com",
         job: "Jammu",
         org: "HandiLooms",
         online: false,
@@ -175,7 +175,7 @@ const TABLE_ROWS = [
     {
         img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
         name: "Dhairya Satra",
-        email: "dhairya@satra.com",
+        email: "dhairya.satra@gmail.com",
         job: "Katra",
         org: "Agriculture",
         online: false,
@@ -184,7 +184,7 @@ const TABLE_ROWS = [
     {
         img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
         name: "Neil Carnac",
-        email: "Neil@carnac.com",
+        email: "neil.carnac@gmail.com",
         job: "POONCH",
         org: "Agriculture",
         online: true,
