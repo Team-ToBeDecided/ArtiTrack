@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import enhance from "../assets/icons/enhance.png";
 import CustomButton from "../components/CustomButton/CustomButton";
-import { Select, Option } from "@material-tailwind/react";
+import { Select, Option, Button } from "@material-tailwind/react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import { useContext } from "react";
@@ -102,7 +102,10 @@ const ProductUpload = () => {
     const [enhancedDescription, setEnhancedDescription] = useState("");
     const [hashtags, setHashtags] = useState([]);
 
-    const [files,setFiles] = useState([]);
+    const [files, setFiles] = useState([]);
+
+    const [imgUrl, setImgUrl] = useState("");
+
 
     const { accessToken, user, userData } = useContext(AuthContext);
 
@@ -122,7 +125,7 @@ const ProductUpload = () => {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization:
-                            "Bearer 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",
+                            "Bearer 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",
                     },
                 }
             );
@@ -255,6 +258,7 @@ const ProductUpload = () => {
 
     console.log(price);
 
+
     const handlePublishWebPage = () => {
         const productData = {
             name: title,
@@ -289,6 +293,7 @@ const ProductUpload = () => {
                     },
                 }).then((response) => {
                     console.log(response.data);
+                    setImgUrl(response.data.image);
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -297,12 +302,42 @@ const ProductUpload = () => {
             console.log(error);
         });
 
-        useEffect(()=>{
+        useEffect(() => {
             console.log("Files in the array: ", files);
-        },[])
+        }, [])
 
     }
     // console.log(media1);
+
+    const createPost = async (pageId, message) => {
+        const url = `https://graph.facebook.com/${pageId}/feed`;
+        const data = {
+            message,
+            access_token: "EAAHarU0FJvcBO1G7ZA0IDK982gRmCC7udmkZBJtY3XWZAD1T3pYKT5XZBHSEhM1MgPZCGnX7AGqaeZAaOrA9Ez0oE3iof1VoS2vSIiNfs9q7sRCgruetICZAdPYljn6Ca4CbFwDXXLxBP2ZBju1IefyXZCMiiCqoZBNuMizrF8CUKzLqL8pYcZCLw5urYBt6uFhV0IZD",
+        };
+        const response = await axios.post(url, data);
+        return response;
+    };
+
+    const createPostWithImage = async (pageId, message, imageUrl) => {
+        const url = `https://graph.facebook.com/${pageId}/photos`;
+        const data = {
+            message,
+            url: imageUrl,
+            access_token: "EAAHarU0FJvcBO1G7ZA0IDK982gRmCC7udmkZBJtY3XWZAD1T3pYKT5XZBHSEhM1MgPZCGnX7AGqaeZAaOrA9Ez0oE3iof1VoS2vSIiNfs9q7sRCgruetICZAdPYljn6Ca4CbFwDXXLxBP2ZBju1IefyXZCMiiCqoZBNuMizrF8CUKzLqL8pYcZCLw5urYBt6uFhV0IZD"
+        };
+        const response = await axios.post(url, data);
+        return response;
+    };
+
+    const publishToFacebook = async () => {
+        const pageId = "100669336396193";
+        const message = description;
+        const imageUrl = "http://144.126.253.88:8000/media/product_images/linkedinBG_LqGHVlz.jpg";
+        const response = await createPostWithImage(pageId, message, imageUrl);
+        console.log(response);
+    }
+
 
     return (
         <Box className="flex flex-wrap gap-10 m-16 lg:flex-nowrap">
@@ -434,11 +469,15 @@ const ProductUpload = () => {
                         padding="5px"
                         click={handlePublishWebPage}
                     />
-                    <CustomButton
+                    {imgUrl === "" ? <Button disabled className="rounded-none w-72" 
+                    >
+                        Publish to ODOP Social Media
+                    </Button> : <CustomButton
                         text="Publish to ODOP Social Media"
                         bgcolor="black"
                         padding="5px"
-                    />
+                        click={publishToFacebook}
+                    />}
                 </Box>
             </Box>
             <Box className="flex gap-12 flex-col w-1/5 h-[100%]">
