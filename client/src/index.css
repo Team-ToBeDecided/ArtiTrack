@@ -65,10 +65,10 @@ html{
 .goog-te-gadget{
   display: none;
 }
-table {
+/* table {
   display: none;
   height: 0px;
-}
+} */
 
 .skiptranslate{
   display: none;
