@@ -27,7 +27,7 @@ const URLBox = ({ onFileDrop }) => {
     });
 
     return (
-        <Box {...getRootProps()} className="flex justify-center shadow-md w-[200px] h-[200px] cursor-pointer">
+        <Box {...getRootProps()} className="flex justify-center shadow-xl w-[200px] h-[200px] cursor-pointer">
             <input {...getInputProps()} />
             <Box className="flex flex-col items-center gap-2">
                 <div className="cursor-pointer">
@@ -64,7 +64,7 @@ const BigURLBox = ({ onFileDrop }) => {
     });
 
     return (
-        <Box {...getRootProps()} className="flex justify-center shadow-md w-[500px] h-[440px] cursor-pointer">
+        <Box {...getRootProps()} className="flex justify-center shadow-xl w-[500px] h-[440px] cursor-pointer">
             <input {...getInputProps()} />
             <Box className="flex flex-col items-center gap-2">
                 <div className="cursor-pointer">
@@ -87,7 +87,7 @@ const BigURLBox = ({ onFileDrop }) => {
 };
 
 const ProductUpload = () => {
-    const [status, setStatus] = useState("Inactive");
+    const [status, setStatus] = useState("Active");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [material, setMaterial] = useState("");
@@ -125,7 +125,7 @@ const ProductUpload = () => {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization:
-                            "Bearer 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",
+                            "Bearer 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",
                     },
                 }
             );
@@ -156,7 +156,7 @@ const ProductUpload = () => {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization:
-                            "Bearer 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",
+                            "Bearer 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",
                     },
                 }
             );
@@ -314,7 +314,7 @@ const ProductUpload = () => {
         const url = `https://graph.facebook.com/${pageId}/feed`;
         const data = {
             message,
-            access_token: "EAAHarU0FJvcBO1G7ZA0IDK982gRmCC7udmkZBJtY3XWZAD1T3pYKT5XZBHSEhM1MgPZCGnX7AGqaeZAaOrA9Ez0oE3iof1VoS2vSIiNfs9q7sRCgruetICZAdPYljn6Ca4CbFwDXXLxBP2ZBju1IefyXZCMiiCqoZBNuMizrF8CUKzLqL8pYcZCLw5urYBt6uFhV0IZD",
+            access_token: "EAAHarU0FJvcBO3Vf2bPPb7jtuz2cPP3ZAGif2iTjZAgLohs8NsAMXPWCzaZAPeu4aQEfG1RX4pj50wjOTJLTCJFX2VKJdOBqFbUg2sdZBFWP2SZBVHKusQc4CQAIiCxwL8QEVr1W5ADx7cbB1FZCGJiSq1Jrl3rPEdg9z06ZCh7xDedePjS9ZADLaiVFgNSsLSsZD",
         };
         const response = await axios.post(url, data);
         return response;
@@ -325,14 +325,14 @@ const ProductUpload = () => {
         const data = {
             message,
             url: imageUrl,
-            access_token: "EAAHarU0FJvcBO1G7ZA0IDK982gRmCC7udmkZBJtY3XWZAD1T3pYKT5XZBHSEhM1MgPZCGnX7AGqaeZAaOrA9Ez0oE3iof1VoS2vSIiNfs9q7sRCgruetICZAdPYljn6Ca4CbFwDXXLxBP2ZBju1IefyXZCMiiCqoZBNuMizrF8CUKzLqL8pYcZCLw5urYBt6uFhV0IZD"
+            access_token: "EAAHarU0FJvcBO3Vf2bPPb7jtuz2cPP3ZAGif2iTjZAgLohs8NsAMXPWCzaZAPeu4aQEfG1RX4pj50wjOTJLTCJFX2VKJdOBqFbUg2sdZBFWP2SZBVHKusQc4CQAIiCxwL8QEVr1W5ADx7cbB1FZCGJiSq1Jrl3rPEdg9z06ZCh7xDedePjS9ZADLaiVFgNSsLSsZD"
         };
         const response = await axios.post(url, data);
         return response;
     };
 
     const publishToFacebook = async () => {
-        const pageId = "100669336396193";
+        const pageId = "141637589026018";
         const message = description;
         const imageUrl = imgUrl;
         const response = await createPostWithImage(pageId, message, imageUrl);
@@ -370,7 +370,7 @@ const ProductUpload = () => {
                         </Typography>
                     </Box>
                 </Box>
-                <Box className="flex flex-col p-10 border-black shadow-md border-1">
+                <Box className="flex flex-col p-10 border-black shadow-lg border-1">
                     <Box className="flex flex-col gap-10">
                         <Box className="flex flex-col w-full">
                             <Typography sx={{
@@ -416,7 +416,7 @@ const ProductUpload = () => {
                         </Box>
                     </Box>
                 </Box>
-                <Box className="flex p-10 border-black shadow-md border-1">
+                <Box className="flex p-10 border-black shadow-lg border-1">
                     <Box className="flex flex-col gap-10">
                         <Typography sx={{
                             fontFamily: 'var(--font-heading)'
@@ -444,7 +444,7 @@ const ProductUpload = () => {
                         </Box>
                     </Box>
                 </Box>
-                <Box className="flex flex-col p-10 border-black shadow-md border-1">
+                <Box className="flex flex-col p-10 border-black shadow-lg border-1">
                     <Box className="flex flex-col gap-10">
                         <Box className="flex flex-col w-full">
                             <Typography sx={{
@@ -452,7 +452,7 @@ const ProductUpload = () => {
                             }} variant="h5">Stock:</Typography>
                             <Typography sx={{
                                 fontFamily: 'var(--font-body)'
-                            }} variant="h7">Available for Sale</Typography>
+                            }} variant="h5">Available for Sale</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter title here"
@@ -482,16 +482,16 @@ const ProductUpload = () => {
                 </Box>
             </Box>
             <Box className="flex gap-12 flex-col w-1/5 h-[100%]">
-                <Box className="flex flex-col justify-center gap-10 p-8 shadow-md">
+                <Box className="flex flex-col justify-center gap-10 p-8 shadow-xl">
                     <Typography sx={{
                         fontFamily: 'var(--font-heading)'
                     }} variant="h5">Status</Typography>
-                    <Select placeholder={status} label="Status" >
+                    <Select label="Status">
                         <Option>Active</Option>
                         <Option>Inactive</Option>
                     </Select>
                 </Box>
-                <Box className="flex flex-col justify-center gap-10 p-8 shadow-md">
+                <Box className="flex flex-col justify-center gap-10 p-8 shadow-xl">
                     <Typography sx={{
                         fontFamily: 'var(--heading)'
                     }} variant="h5">Product Details</Typography>
@@ -499,7 +499,7 @@ const ProductUpload = () => {
                         <Box className="flex flex-col w-full">
                             <Typography sx={{
                                 fontFamily: 'var(--heading)'
-                            }} variant="h6">Material:</Typography>
+                            }} variant="h5">Material:</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter material here"
@@ -511,7 +511,7 @@ const ProductUpload = () => {
                         <Box className="flex flex-col w-full">
                             <Typography sx={{
                                 fontFamily: 'var(--heading)'
-                            }} variant="h6">Craft:</Typography>
+                            }} variant="h5">Craft:</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter craft here"
@@ -523,7 +523,7 @@ const ProductUpload = () => {
                         <Box className="flex flex-col w-full">
                             <Typography sx={{
                                 fontFamily: 'var(--heading)'
-                            }} variant="h6">District:</Typography>
+                            }} variant="h5">District:</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter district here"
@@ -535,7 +535,7 @@ const ProductUpload = () => {
                         <Box className="flex flex-col w-full">
                             <Typography sx={{
                                 fontFamily: 'var(--heading)'
-                            }} variant="h6">Measurements:</Typography>
+                            }} variant="h5">Measurements:</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter measurements here"
@@ -547,7 +547,7 @@ const ProductUpload = () => {
                         <Box className="flex flex-col w-full">
                             <Typography sx={{
                                 fontFamily: 'var(--heading)'
-                            }} variant="h6">Product Weight:</Typography>
+                            }} variant="h5">Product Weight:</Typography>
                             <input
                                 type="text"
                                 placeholder="Enter product weight here"
@@ -559,10 +559,10 @@ const ProductUpload = () => {
                         <Box className="flex flex-col w-full">
                             <Typography sx={{
                                 fontFamily: 'var(--heading)'
-                            }} variant="h6">Price</Typography>
+                            }} variant="h5">Price</Typography>
                             <input
                                 type="text"
-                                placeholder="Enter price here"
+                                placeholder="Enter product weight here"
                                 className="p-3 bg-gray-100"
                                 value={price}
                                 onChange={handlePriceChange}
@@ -571,7 +571,7 @@ const ProductUpload = () => {
                     </Box>
                 </Box>
 
-                <Box className="flex flex-col justify-center gap-10 p-8 shadow-md">
+                <Box className="flex flex-col justify-center gap-10 p-8 shadow-xl">
                     <Typography sx={{
                         fontFamily: 'var(--heading)'
                     }} variant="h5">Insights</Typography>
