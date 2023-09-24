@@ -8,29 +8,30 @@ import CustomButton from "../components/CustomButton/CustomButton";
 import { Select, Option } from "@material-tailwind/react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../components/AuthContext";
+import { BASE_URL } from "../constants/basUrl";
 
-const URLBox = () => {
+const URLBox = ({ onFileDrop }) => {
     const [previewImage, setPreviewImage] = useState(null);
 
     const { getRootProps, getInputProps } = useDropzone({
-        accept: "image/*, video/*",
+        accept: 'image/*, video/*',
         onDrop: (acceptedFiles) => {
             if (acceptedFiles && acceptedFiles.length > 0) {
                 const file = acceptedFiles[0]; // Assuming you want to display only the first dropped file
                 setPreviewImage(URL.createObjectURL(file));
+                onFileDrop(file);
             }
         },
     });
-    
 
     return (
-        <Box {...getRootProps()} className={` flex justify-center shadow-xl w-[200px] h-[200px] cursor-pointer`}>
+        <Box {...getRootProps()} className="flex justify-center shadow-xl w-[200px] h-[200px] cursor-pointer">
             <input {...getInputProps()} />
             <Box className="flex flex-col items-center gap-2">
                 <div className="cursor-pointer">
-
                     {previewImage ? null : (
-
                         <button className="p-2 w-full text-[8px] bg-green-100 border rounded-[20px]">
                             Add from URL
                         </button>
@@ -40,35 +41,34 @@ const URLBox = () => {
                     <img
                         src={previewImage}
                         alt="Preview"
-                        style={{ width: "180px", height: "180px" }}
+                        style={{ width: '180px', height: '180px' }}
                     />
                 )}
-
             </Box>
         </Box>
     );
 };
-const BigURLBox = () => {
+
+const BigURLBox = ({ onFileDrop }) => {
     const [previewImage, setPreviewImage] = useState(null);
 
     const { getRootProps, getInputProps } = useDropzone({
-        accept: "image/*, video/*",
+        accept: 'image/*, video/*',
         onDrop: (acceptedFiles) => {
             if (acceptedFiles && acceptedFiles.length > 0) {
                 const file = acceptedFiles[0]; // Assuming you want to display only the first dropped file
                 setPreviewImage(URL.createObjectURL(file));
+                onFileDrop(file);
             }
         },
     });
 
     return (
-        <Box {...getRootProps()} className={` flex justify-center shadow-xl w-[500px] h-[440px] cursor-pointer`}>
+        <Box {...getRootProps()} className="flex justify-center shadow-xl w-[500px] h-[440px] cursor-pointer">
             <input {...getInputProps()} />
             <Box className="flex flex-col items-center gap-2">
                 <div className="cursor-pointer">
-
                     {previewImage ? null : (
-
                         <button className="p-2 w-full text-[8px] bg-green-100 border rounded-[20px]">
                             Add from URL
                         </button>
@@ -78,10 +78,9 @@ const BigURLBox = () => {
                     <img
                         src={previewImage}
                         alt="Preview"
-                        style={{ width: "480px", height: "420px" }}
+                        style={{ width: '480px', height: '420px' }}
                     />
                 )}
-
             </Box>
         </Box>
     );
@@ -98,43 +97,14 @@ const ProductUpload = () => {
     const [productWeight, setProductWeight] = useState("");
     const [stock, setStock] = useState("");
     const [availableForSale, setAvailableForSale] = useState("");
-    const [price, setPrice] = useState("");
+    const [price, setPrice] = useState(0);
 
     const [enhancedDescription, setEnhancedDescription] = useState("");
     const [hashtags, setHashtags] = useState([]);
 
-    const [files1, setFiles1] = useState([]);
-    const [media1, setMedia1] = useState([]);
+    const [files,setFiles] = useState([]);
 
-    const [files2, setFiles2] = useState([]);
-    const [media2, setMedia2] = useState([]);
-
-    const [files3, setFiles3] = useState([]);
-    const [media3, setMedia3] = useState([]);
-
-    const [files4, setFiles4] = useState([]);
-    const [media4, setMedia4] = useState([]);
-
-    const [files5, setFiles5] = useState([]);
-    const [media5, setMedia5] = useState([]);
-
-    const [files6, setFiles6] = useState([]);
-    const [media6, setMedia6] = useState([]);
-
-    const [files7, setFiles7] = useState([]);
-    const [media7, setMedia7] = useState([]);
-
-    const [files8, setFiles8] = useState([]);
-    const [media8, setMedia8] = useState([]);
-
-    const [files9, setFiles9] = useState([]);
-    const [media9, setMedia9] = useState([]);
-
-    useEffect(() => {
-        console.log(files1);
-        console.log(files2);
-        console.log(files3);
-    }, []);
+    const { accessToken, user, userData } = useContext(AuthContext);
 
     const enhanceDesc = async () => {
         const API_ENDPOINT =
@@ -152,7 +122,7 @@ const ProductUpload = () => {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization:
-                            "Bearer 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",
+                            "Bearer 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",
                     },
                 }
             );
@@ -189,13 +159,10 @@ const ProductUpload = () => {
             );
 
             console.log(response.data);
-            // let hashtags = response.data.choices[2];
             let hashtags = response.data.choices.map((choice) => choice.text.trim());
-            // setHashtags(hashtags);
             const consecutiveHashtags = hashtags.join(" ").replace(/\n/g, "");
             console.log(consecutiveHashtags);
-            // console.log(response.data.choices[2])
-            // setDescription(enhancedDescription+consecutiveHashtags);
+
             console.log(hashtags);
         } catch (error) {
             console.error(error);
@@ -203,105 +170,11 @@ const ProductUpload = () => {
         }
     };
 
-    const handleDrop1 = (acceptedFiles) => {
+    const handleDrop = (acceptedFiles) => {
         console.log("Files accepted: ", acceptedFiles);
-        setFiles1([...files1, ...acceptedFiles]);
-
-        const processedMedia = acceptedFiles.map((file) => ({
-            ...file,
-            preview: URL.createObjectURL(file),
-        }));
-
-        setMedia1([...media1, ...processedMedia]);
+        files.push(acceptedFiles);
     };
 
-    const handleDrop2 = (acceptedFiles) => {
-        setFiles2([...files2, ...acceptedFiles]);
-
-        const processedMedia = acceptedFiles.map((file) => ({
-            ...file,
-            preview: URL.createObjectURL(file),
-        }));
-
-        setMedia2([...media2, ...processedMedia]);
-    };
-
-    const handleDrop3 = (acceptedFiles) => {
-        setFiles3([...files3, ...acceptedFiles]);
-
-        const processedMedia = acceptedFiles.map((file) => ({
-            ...file,
-            preview: URL.createObjectURL(file),
-        }));
-
-        setMedia3([...media3, ...processedMedia]);
-    };
-
-    const handleDrop4 = (acceptedFiles) => {
-        setFiles4([...files4, ...acceptedFiles]);
-
-        const processedMedia = acceptedFiles.map((file) => ({
-            ...file,
-            preview: URL.createObjectURL(file),
-        }));
-
-        setMedia4([...media4, ...processedMedia]);
-    };
-
-    const handleDrop5 = (acceptedFiles) => {
-        setFiles5([...files5, ...acceptedFiles]);
-
-        const processedMedia = acceptedFiles.map((file) => ({
-            ...file,
-            preview: URL.createObjectURL(file),
-        }));
-
-        setMedia5([...media5, ...processedMedia]);
-    };
-
-    const handleDrop6 = (acceptedFiles) => {
-        setFiles6([...files6, ...acceptedFiles]);
-
-        const processedMedia = acceptedFiles.map((file) => ({
-            ...file,
-            preview: URL.createObjectURL(file),
-        }));
-
-        setMedia6([...media6, ...processedMedia]);
-    };
-
-    const handleDrop7 = (acceptedFiles) => {
-        setFiles7([...files7, ...acceptedFiles]);
-
-        const processedMedia = acceptedFiles.map((file) => ({
-            ...file,
-            preview: URL.createObjectURL(file),
-        }));
-
-        setMedia7([...media7, ...processedMedia]);
-    };
-
-    const handleDrop8 = (acceptedFiles) => {
-        setFiles8([...files8, ...acceptedFiles]);
-
-        const processedMedia = acceptedFiles.map((file) => ({
-            ...file,
-            preview: URL.createObjectURL(file),
-        }));
-
-        setMedia8([...media8, ...processedMedia]);
-    };
-
-    const handleDrop9 = (acceptedFiles) => {
-        setFiles9([...files9, ...acceptedFiles]);
-
-        const processedMedia = acceptedFiles.map((file) => ({
-            ...file,
-            preview: URL.createObjectURL(file),
-        }));
-
-        setMedia9([...media9, ...processedMedia]);
-    }
 
     const handleStatusChange = (e) => {
         setStatus(e.target.value);
@@ -348,7 +221,7 @@ const ProductUpload = () => {
     };
 
     const handlePriceChange = (e) => {
-        setPrice(e.target.files);
+        setPrice(e.target.value);
     };
 
     const handleSubmit = () => {
@@ -363,14 +236,6 @@ const ProductUpload = () => {
             stock: stock,
             available_for_sale: availableForSale,
             price: price,
-            files1: files1,
-            files2: files2,
-            files3: files3,
-            files4: files4,
-            files5: files5,
-            files6: files6,
-            files7: files7,
-            files8: files8,
         };
 
         social_id.forEach((value, index) => {
@@ -388,6 +253,57 @@ const ProductUpload = () => {
         console.log(formData);
     };
 
+    console.log(price);
+
+    const handlePublishWebPage = () => {
+        const productData = {
+            name: title,
+            price: parseInt(price),
+            stock: parseInt(stock),
+            description: description,
+            district: district,
+            address: userData.address,
+            material: material,
+            craft: craft,
+            measurement: measurements,
+            weight: productWeight,
+            is_active: true,
+            artisan: userData.id
+        };
+        console.log(productData);
+        axios.post(BASE_URL + "products/product/", productData).then((response) => {
+            console.log(response.data);
+            const product_id = response.data.id;
+            files.forEach((file) => {
+                console.log("product_id:", product_id);
+                console.log("file:", file);
+                // const data = new FormData();
+                const formData = {
+                    product: product_id,
+                    image: file
+                }
+                console.log(formData);
+                axios.post(BASE_URL + "products/productimage/", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }).then((response) => {
+                    console.log(response.data);
+                }).catch((error) => {
+                    console.log(error);
+                });
+            });
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        useEffect(()=>{
+            console.log("Files in the array: ", files);
+        },[])
+
+    }
+    // console.log(media1);
+
     return (
         <Box className="flex flex-wrap gap-10 m-16 lg:flex-nowrap">
             <Box height={30} />
@@ -397,7 +313,7 @@ const ProductUpload = () => {
                     <Box className="flex gap-2">
                         <Typography sx={{
                             fontFamily: 'var(--font-heading)'
-                        }} variant="h4">Artisan's Username</Typography>
+                        }} variant="h4">{userData.first_name + " " + userData.last_name}</Typography>
                         <Typography
                             sx={{
                                 fontSize: "12px",
@@ -472,23 +388,23 @@ const ProductUpload = () => {
                         <Box className="flex gap-10">
                             <Box className="flex flex-col gap-10">
                                 <Box className="flex flex-wrap gap-12 lg:flex-nowrap">
-                                    <URLBox onDrop={handleDrop1} />
-                                    <URLBox onDrop={handleDrop2} />
+                                    <URLBox onFileDrop={handleDrop} />
+                                    <URLBox onFileDrop={handleDrop} />
                                 </Box>
                                 <Box className="flex flex-wrap gap-12 lg:flex-nowrap">
-                                    <URLBox onDrop={handleDrop3} />
-                                    <URLBox onDrop={handleDrop9} />
+                                    <URLBox onFileDrop={handleDrop} />
+                                    <URLBox onFileDrop={handleDrop} />
                                 </Box>
                             </Box>
                             <Box className="flex flex-wrap gap-12">
-                                <BigURLBox onDrop={handleDrop8} padding="p-44" />
+                                <BigURLBox onFileDrop={handleDrop} padding="p-44" />
                             </Box>
                         </Box>
                         <Box className="flex flex-wrap gap-12 lg:flex-nowrap">
-                            <URLBox onDrop={handleDrop4} />
-                            <URLBox onDrop={handleDrop5} />
-                            <URLBox onDrop={handleDrop6} />
-                            <URLBox onDrop={handleDrop7} />
+                            <URLBox onFileDrop={handleDrop} />
+                            <URLBox onFileDrop={handleDrop} />
+                            <URLBox onFileDrop={handleDrop} />
+                            <URLBox onFileDrop={handleDrop} />
                         </Box>
                     </Box>
                 </Box>
@@ -506,6 +422,7 @@ const ProductUpload = () => {
                                 placeholder="Enter title here"
                                 className="p-3 bg-gray-100"
                                 value={stock}
+                                onChange={handleStockChange}
                             />
                         </Box>
                     </Box>
@@ -515,6 +432,7 @@ const ProductUpload = () => {
                         text="Publish to WebPage"
                         bgcolor="black"
                         padding="5px"
+                        click={handlePublishWebPage}
                     />
                     <CustomButton
                         text="Publish to ODOP Social Media"

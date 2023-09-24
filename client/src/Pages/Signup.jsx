@@ -91,7 +91,7 @@ export const Signup = () => {
         userType === "Consumer"
           ? "consumer"
           : userType === "WholeSale Consumer"
-          ? "wholesale_consumer"
+          ? "wholesaler"
           : "artisan",
       gender: gender,
       phone_number: phoneNo,

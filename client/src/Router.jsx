@@ -8,7 +8,9 @@ import { Signup } from "./Pages/Signup";
 import { ConsumerProfilePage } from "./Pages/ConsumerProfilePage";
 import ProductCartPage from "./Pages/ProductCartPage";
 import ProductUpload from "./Pages/ProductUpload";
+import InfoPan from "./Pages/InfoPan";
 import { ArtisanProfilePage } from "./Pages/ArtisanProfilePage";
+import { B2BDashBoard } from "./Pages/B2BDashBoard";
 
 export const AppRoutes = () => {
     return (
@@ -17,12 +19,14 @@ export const AppRoutes = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/signup" element={<Signup/>} />
                 <Route path="/products" element={<Products />} />
-                <Route path="/products/desc" element={<Product2 />} />
+                <Route path="/products/:id" element={<Product2 />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/productUpload" element={<ProductUpload />} />
+                <Route path="/informationPanel" element={<InfoPan />} />
                 <Route path="/consumerProfile" element={<ConsumerProfilePage />} />
                 <Route path="/artisanProfile" element={<ArtisanProfilePage />} />
                 <Route path="/cart" element={<ProductCartPage />} />
+                <Route path="/b2bdashboard" element={<B2BDashBoard/>} />
             </Routes>
         </>
     );

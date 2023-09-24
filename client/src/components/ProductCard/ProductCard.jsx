@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BsArrowRight } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import axios from 'axios';
+import { BASE_URL } from '../../constants/basUrl';
 import { Typography, useMediaQuery } from '@mui/material';
 
-function ProductCard(
-    // { product }
+
+export function ProductCard(
+    { product }
     ) {
     // const dispatch = useDispatch();
+    console.log(product)
     const navigate = useNavigate();
+
+    const [img, setImg] = React.useState('')
+
+    const getImage =async () => {
+        const response = await axios.get(BASE_URL + `/products/productimage/?search=${product.id}`)
+        console.log(response.data)
+        setImg(response.data[0].image)
+    }
+
+    useEffect(() => {
+        getImage()
+    }, [])
 
     const md = useMediaQuery("(min-width:1024px)")
 
@@ -21,7 +36,7 @@ function ProductCard(
                 className="w-full h-[500px] overflow-hidden cursor-pointer">
                 <img
                     // src={product.Images && product.Images.length > 0 ? product.Images[0] : ''}
-                    src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
+                    src={img}
                     alt="Image"
                     className="object-cover w-full h-full duration-500 hover:scale-110"
                 />
@@ -32,16 +47,13 @@ function ProductCard(
                         <Typography sx={{
                             fontFamily: 'var(--heading)',
                         }} className='text-2xl'>
-                            Item 1
+                            {product.name}
                         </Typography>
                     </div>
                     <div className='relative flex gap-2 overflow-hidden w-28'>
                         <div className='relative flex justify-end gap-2 px-2 mx-2 transition-transform duration-500 transform group-hover:translate-x-32 -text-sm w-28'>
-                            <p className="line-through text-[15px] text-gray-500">
-                                $100
-                            </p>
                             <p className='font-semibold text-[16px]'>
-                                $50 
+                                Rs{product.price}
                             </p>
                         </div>
                         <p className='absolute text-[11px] z-20 w-[100px] text-gray-500 hover:text-gray-900 flex items-center 
@@ -57,7 +69,7 @@ function ProductCard(
                 </div>
                 <div>
                     <p>
-                        Shawl
+                        {product.craft}
                     </p>
                 </div>
             </div>
