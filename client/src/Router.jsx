@@ -9,6 +9,7 @@ import { ConsumerProfilePage } from "./Pages/ConsumerProfilePage";
 import ProductCartPage from "./Pages/ProductCartPage";
 import ProductUpload from "./Pages/ProductUpload";
 import { ArtisanProfilePage } from "./Pages/ArtisanProfilePage";
+import { B2BDashBoard } from "./Pages/B2BDashBoard";
 
 export const AppRoutes = () => {
     return (
@@ -23,6 +24,7 @@ export const AppRoutes = () => {
                 <Route path="/consumerProfile" element={<ConsumerProfilePage />} />
                 <Route path="/artisanProfile" element={<ArtisanProfilePage />} />
                 <Route path="/cart" element={<ProductCartPage />} />
+                <Route path="/b2bdashboard" element={<B2BDashBoard/>} />
             </Routes>
         </>
     );
