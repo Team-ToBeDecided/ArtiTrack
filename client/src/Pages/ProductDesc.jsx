@@ -65,19 +65,19 @@ const ProductImage = ({ product }) => {
 
     const getImage = async () => {
         const response = await axios.get(BASE_URL + `/products/productimage/?search=${product.id}`);
-        console.log(response.data);
+        console.log('Response data:', response.data); // Log the entire response data
         setImg(response.data);
     };
 
     useEffect(() => {
         getImage();
-    }, [img])
+    }, [product.id]) // Add img as a dependency
 
     return (
         <Box className="flex flex-col w-full gap-10 m-0 lg:ml-20">
             <Box>
                 {img && img[0] && (
-                    <img src={img[0].image} className='w-[400px] h-[600px]' alt="" />
+                    <img src={img[0].image} className='w-[400px] h-[600px]' alt="" onLoad={() => console.log('Image loaded')} onError={() => console.log('Image load error')} /> // Log when the image is loaded or if there's an error
                 )}
             </Box>
             <Box className="flex gap-10">
@@ -85,7 +85,7 @@ const ProductImage = ({ product }) => {
                     img.map((image, index) => (
                         <Box className="flex" key={index}>
                             {index !== 0 && image && image.image && (
-                                <img src={image.image} className='w-[150px] h-[200px]' alt="" srcSet="" />
+                                <img src={image.image} className='w-[150px] h-[200px]' alt="" srcSet="" onLoad={() => console.log('Image loaded')} onError={() => console.log('Image load error')} /> // Log when the image is loaded or if there's an error
                             )}
                         </Box>
                     ))}
@@ -120,7 +120,7 @@ const Product2 = () => {
     useEffect(() => {
         getProduct();
         getProducts();
-    }, [product, products]);
+    }, [id]);
 
     const [counter, setCounter] = useState(1)
     const [currentImg, setCurrentImg] = useState(0)
@@ -306,7 +306,7 @@ const Product2 = () => {
                 </Box>
             </Box>
             <Box height={30} />
-            <Box className="flex justify-center w-[100%] justify-center gap-20 flex-wrap lg:flex-nowrap xl:flex-nowrap">
+            <Box className="flex justify-center w-[100%] gap-20 flex-wrap lg:flex-nowrap xl:flex-nowrap">
                 <Box className="flex justify-center">
                     <Box className="flex flex-col items-center lg:items-start gap-20 w-[90%]">
                         <CustomButton text="Preserve Artisan's Heritage" bgcolor="#383330" />
