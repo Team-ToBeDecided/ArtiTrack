@@ -176,13 +176,13 @@ export const NavbarDefaut = () => {
             )
           }
           {
-            userRole === "supplyChain" || "artisan" ? (
+            userRole === "artisan" ? (
               <Typography
                 variant="text"
-                onClick={() => navigate("/supplyChainDashboard")}
+                onClick={() => navigate("/supplyChainRequest")}
                 className="mx-3 text-white cursor-pointer font-heading text-md"
                 ripple={false}
-              >SupplyChain DashBoard</Typography>
+              >SupplyChain Requests</Typography>
             ) : (
               null
             )

@@ -11,7 +11,7 @@ import { BASE_URL } from '../constants/basUrl';
 
 
 
-const SupplyChainDashboard = () => {
+const SupplyChainRequests = () => {
 
     const [supplyRequests, setSupplyRequests] = useState([{}]);
     const [products, setProducts] = useState([{}]);
@@ -55,7 +55,7 @@ const SupplyChainDashboard = () => {
     return (
         <>
             <div className="flex p-16 justify-center">
-                <Header text="Supply Chain DashBoard" />
+                <Header text="Supply Chain Requests" />
             </div>
             <Box sx={{
                 display: 'grid',
@@ -80,4 +80,4 @@ const SupplyChainDashboard = () => {
     )
 }
 
-export default SupplyChainDashboard;
+export default SupplyChainRequests;
