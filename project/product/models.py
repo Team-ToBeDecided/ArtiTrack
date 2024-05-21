@@ -57,3 +57,10 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order {self.id} by {self.user.email}"
+    
+class SupplyRequest(models.Model):
+    id = models.AutoField(primary_key=True)
+    order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    new_supplier_address = models.CharField(max_length=2000)
+    artisan = models.ForeignKey('userconf.User', related_name='supply_requests', on_delete=models.CASCADE)
+    amount = models.FloatField()

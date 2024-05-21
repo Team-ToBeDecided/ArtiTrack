@@ -56,6 +56,11 @@ export const NavbarDefaut = () => {
     }
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   const location = useLocation();
   return (
     <>
@@ -171,7 +176,7 @@ export const NavbarDefaut = () => {
             )
           }
           {
-            userRole === "supplyChain" ? (
+            userRole === "supplyChain" || "artisan" ? (
               <Typography
                 variant="text"
                 onClick={() => navigate("/supplyChainDashboard")}
@@ -185,7 +190,7 @@ export const NavbarDefaut = () => {
           {accessToken ? (
             <Typography
               variant="text"
-              onClick={() => logout()}
+              onClick={() => handleLogout()}
               className="mx-5 text-white cursor-pointer font-heading text-md"
               ripple={false}
             >

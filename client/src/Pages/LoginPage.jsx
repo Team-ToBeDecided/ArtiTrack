@@ -21,6 +21,8 @@ export const Login = () => {
         navigate('/products');
       } else if (userRole === 'artisan') { 
         navigate('/artisanProfile'); 
+      } else if(userRole ==='supplyChain'){
+        navigate('/orders')
       }
     }
   }, [accessToken, userRole, navigate]);

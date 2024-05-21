@@ -34,3 +34,9 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     filter_backends = [SearchFilter]
     search_fields = ['user__id']
+
+class SupplyRequestViewSet(viewsets.ModelViewSet):
+    serializer_class = SupplyRequestSerializer
+    queryset = SupplyRequest.objects.all()
+    filter_backends = [SearchFilter]
+    search_fields = ['artisan__id']

@@ -44,6 +44,17 @@ export default function OrderCard(order) {
         getProductImage();
     }, [product])
 
+    const createRequest = async () => {
+        const response = await axios.post(BASE_URL + `products/supplyrequest/`, {
+            new_supplier_address: "0x1234567890",
+            artisan: order.order.artisan,
+            order: order.order.id,
+            amount: product.price,
+        });
+        console.log(response);
+        alert('Request Created');
+    }
+
     return (
         <Card sx={{ maxWidth: 450 }}>
             <CardMedia
@@ -75,7 +86,7 @@ export default function OrderCard(order) {
                 {userData.role === 'consumer' ?
                     <SmallButton text={"Track Order"} click={() => { navigate(`/orders/${order.order.id}`) }} bgcolor={"var(--dark-blue)"} />
                     : userData.role === 'supplyChain' ?
-                        <SmallButton text={"Start Supplying"} click={() => { navigate(`/supplyChainDashboard`) }} bgcolor={"var(--dark-blue)"} />
+                        <SmallButton text={"Start Supplying"} click={() => { createRequest() }} bgcolor={"var(--dark-blue)"} />
                         : null}
                 <SmallButton text={"Product Details"} click={() => { navigate(`/products/${product.id}`) }} bgcolor={"var(--authentic)"} />
             </CardActions>
