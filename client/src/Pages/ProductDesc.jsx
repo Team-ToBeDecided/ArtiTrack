@@ -251,16 +251,17 @@ const Product2 = () => {
                         </Typography>
                         <Typography
                             sx={{
-                                fontSize: 'var(--authentic-font-size)',
+                                fontSize: '30px',
                                 textTransform: 'uppercase',
-                                fontWeight: 600,
+                                fontWeight: 1000,
                                 color: 'var(--authentic)',
+                                fontFamily: 'var(--heading)',
                                 letterSpacing: 'var(--authentic-letter-spacing)'
                             }}
                             className='underline'
                         >
                             {/* {details.Name} */}
-                            Artisan's Info
+                            Price: {product.price}/- INR
                         </Typography>
                         <SocialMediaBox />
                         <Box height={2} sx={{

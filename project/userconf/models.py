@@ -45,6 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     profile_image = models.ImageField(upload_to='profile_image', blank=True, null=True)
     gstin = models.CharField(max_length=30, null=True, blank=True)
     company_name = models.CharField(max_length=30, null=True, blank=True)
+    wallet_address = models.CharField(max_length=100, null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']

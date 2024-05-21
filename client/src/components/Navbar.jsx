@@ -158,6 +158,30 @@ export const NavbarDefaut = () => {
               null
             )
           }
+          {
+            userRole === "supplyChain" ? (
+              <Typography
+                variant="text"
+                onClick={() => navigate("/orders")}
+                className="mx-3 text-white cursor-pointer font-heading text-md"
+                ripple={false}
+              >Orders</Typography>
+            ) : (
+              null
+            )
+          }
+          {
+            userRole === "supplyChain" ? (
+              <Typography
+                variant="text"
+                onClick={() => navigate("/supplyChainDashboard")}
+                className="mx-3 text-white cursor-pointer font-heading text-md"
+                ripple={false}
+              >SupplyChain DashBoard</Typography>
+            ) : (
+              null
+            )
+          }
           {accessToken ? (
             <Typography
               variant="text"
