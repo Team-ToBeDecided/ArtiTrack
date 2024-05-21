@@ -34,7 +34,7 @@ class Cart(models.Model):
     product = models.ManyToManyField(Product)
 
     def __str__(self):
-        return self.user.username
+        return self.user.email
 
 class Wishlist(models.Model):
     id = models.AutoField(primary_key=True)
@@ -42,4 +42,18 @@ class Wishlist(models.Model):
     product = models.ManyToManyField(Product)
 
     def __str__(self):
-        return self.user.username
+        return self.user.email
+    
+class Order(models.Model):
+    id = models.AutoField(primary_key=True)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    artisan = models.ForeignKey('userconf.User', related_name='orders_made', on_delete=models.CASCADE)
+    user = models.ForeignKey('userconf.User', related_name='orders_received', on_delete=models.CASCADE)
+    amount = models.FloatField()
+    nft_token_id = models.CharField(max_length=200, null=True, blank=True)
+    delievered = models.BooleanField(default=False)
+    delivery_address = models.CharField(max_length=2000)
+    supplier = models.ForeignKey('userconf.User', related_name='orders_supplied', on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return f"Order {self.id} by {self.user.email}"

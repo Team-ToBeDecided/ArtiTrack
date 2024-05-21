@@ -18,6 +18,8 @@ import DepartmentSlider from '../components/DepartmentSlider/DepartmentSlider';
 
 import axios from 'axios'
 import { BASE_URL } from '../constants/basUrl';
+import { AuthContext } from '../components/AuthContext';
+import { useContext } from 'react';
 
 
 const Breakerline = ({ bgcolor, width }) => {
@@ -99,6 +101,10 @@ const Product2 = () => {
     const [products, setProducts] = useState([]);
     const { id } = useParams();
 
+    const { userData } = useContext(AuthContext);
+
+    console.log('User:', userData);
+
     const getProduct = async () => {
         try {
             const response = await axios.get(`${BASE_URL}/products/product/${id}`);
@@ -137,6 +143,24 @@ const Product2 = () => {
     }
 
     const md = useMediaQuery('(min-width:1024px)')
+
+    const placeOrder = async () => {
+        const data = {
+            amount: 0.005,
+            delivery_address: "Mumbai Maharashtra India",
+            product: product.id,
+            artisan: product.artisan,
+            user: userData.id,
+        };
+        console.log("data: ", data);
+    try {
+        const response = await axios.post(`${BASE_URL}/products/order/`, data);
+        console.log('Order placed:', response);
+    } catch (error) {
+        console.error('Error placing order:', error);
+    }
+}
+
 
     return (
         <>
@@ -299,7 +323,7 @@ const Product2 = () => {
                                     </Button>
                                 </Box>
                             </Box>
-                            <CustomButton text='Add to Cart' bgcolor="black" />
+                            <CustomButton text='Place Order' bgcolor="black" click={()=>{placeOrder()}} />
                         </Box>
                     </Box>
                     <Box height={20} />

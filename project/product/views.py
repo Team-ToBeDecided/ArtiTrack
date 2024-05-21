@@ -2,8 +2,11 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.filters import SearchFilter
+from rest_framework.exceptions import NotFound
 from .models import *
 from .serializers import *
+from userconf.models import User
+
 
 # Create your views here.
 
@@ -25,3 +28,9 @@ class CartViewSet(viewsets.ModelViewSet):
 class WishlistViewSet(viewsets.ModelViewSet):
     queryset = Wishlist.objects.all()
     serializer_class = WishlistSerializer
+
+class OrderViewSet(viewsets.ModelViewSet):
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
+    filter_backends = [SearchFilter]
+    search_fields = ['user__id']

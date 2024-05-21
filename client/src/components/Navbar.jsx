@@ -150,7 +150,7 @@ export const NavbarDefaut = () => {
             userRole === "consumer" ? (
               <Typography
                 variant="text"
-                onClick={() => navigate("/artisanProfile")}
+                onClick={() => navigate("/consumerProfile")}
                 className="mx-3 text-white cursor-pointer font-heading text-md"
                 ripple={false}
               >Profile</Typography>
@@ -194,7 +194,7 @@ export const NavbarDefaut = () => {
           )}
           <MagnifyingGlassIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
           <HeartIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
-          <ShoppingCartIcon className="w-6 h-6 mr-10 text-white cursor-pointer" />
+          <ShoppingCartIcon onClick={()=>{navigate('/cart')}} className="w-6 h-6 mr-10 text-white cursor-pointer" />
         </div>
       </Card>
       {/* <div id="google_translate_element">

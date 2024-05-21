@@ -19,6 +19,7 @@
     "description": "none",
     "profile_image": null,
     "gstin": "none",
+    "company_name": null,
     "groups": [],
     "user_permissions": []
 }
