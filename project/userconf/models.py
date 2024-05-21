@@ -24,6 +24,7 @@ ROLE = [
     ('artisan', 'artisan'),
     ('admin', 'admin'),
     ('wholesaler', 'wholesaler'),
+    ('supplyChain', 'supplyChain'),
 ]
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -39,10 +40,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=15)
     address = models.CharField(max_length=100, null=True, blank=True)
     district = models.CharField(max_length=30, null=True, blank=True)
-    craft = models.CharField(max_length=30, null=True)
-    description = models.CharField(max_length=200, null=True)
+    craft = models.CharField(max_length=30, null=True, blank=True)
+    description = models.CharField(max_length=200, null=True, blank=True)
     profile_image = models.ImageField(upload_to='profile_image', blank=True, null=True)
-    gstin = models.CharField(max_length=30, null=True)
+    gstin = models.CharField(max_length=30, null=True, blank=True)
+    company_name = models.CharField(max_length=30, null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']

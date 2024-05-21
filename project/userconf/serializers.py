@@ -37,7 +37,8 @@ class UserSerializer(serializers.ModelSerializer):
         craft=validated_data.get('craft', ''),
         description=validated_data.get('description', ''),
         profile_image=validated_data.get('profile_image', None),
-        gstin=validated_data.get('gstin', '')
+        gstin=validated_data.get('gstin', ''),
+        company_name=validated_data.get('company_name', '')
     )
         user.set_password(validated_data['password'])
         user.save()

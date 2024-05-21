@@ -11,6 +11,7 @@ import ProductUpload from "./Pages/ProductUpload";
 import InfoPan from "./Pages/InfoPan";
 import { ArtisanProfilePage } from "./Pages/ArtisanProfilePage";
 import { B2BDashBoard } from "./Pages/B2BDashBoard";
+import SupplyChainDashboard from "./Pages/SupplyChainDashboard";
 
 export const AppRoutes = () => {
     return (
@@ -27,6 +28,7 @@ export const AppRoutes = () => {
                 <Route path="/artisanProfile" element={<ArtisanProfilePage />} />
                 <Route path="/cart" element={<ProductCartPage />} />
                 <Route path="/b2bdashboard" element={<B2BDashBoard/>} />
+                <Route path="/supplyChainDashboard" element={<SupplyChainDashboard/>} />
             </Routes>
         </>
     );

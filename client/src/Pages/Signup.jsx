@@ -20,10 +20,11 @@ export const Signup = () => {
   const [gstin, setGstin] = React.useState("");
   const [district, setDistrict] = React.useState("");
   const [craft, setCraft] = React.useState(null);
+  const [company, setCompany] = React.useState(null);
 
   const [userType, setUserType] = React.useState("Consumer");
 
-  const { login, accessToken, userData } = useContext(AuthContext);
+  const { login, accessToken, userData, userRole } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -37,6 +38,9 @@ export const Signup = () => {
       }
       else if (userRole === 'wholesaler') {
         navigate('/b2bdashboard');
+      }
+      else if(userRole === "supplyChain"){
+        navigate('/supplyChainDashboard');
       }
     }
   }, [accessToken, userData]);
@@ -85,6 +89,10 @@ export const Signup = () => {
     setCraft(e.target.value);
   };
 
+  const handleCompanyChange = (e) => {
+    setCompany(e.target.value);
+  };
+
   const handleLogin = () => {
     console.log(email, password);
     login(email, password);
@@ -103,7 +111,10 @@ export const Signup = () => {
           ? "consumer"
           : userType === "WholeSale Consumer"
             ? "wholesaler"
-            : "artisan",
+            : userType === "Artisan"
+              ? "artisan" :
+              userType === "Supply Chain" ?
+                "supplyChain" : null,
       gender: gender,
       phone_number: phoneNo,
       address: address,
@@ -111,6 +122,7 @@ export const Signup = () => {
       craft: craft,
       description: "none",
       gstin: gstin,
+      company_name: company
     };
     console.log(userData);
     axios.post(BASE_URL + "users/register/", userData).then(
@@ -178,6 +190,15 @@ export const Signup = () => {
               onClick={() => setUserType("Artisan")}
             >
               Artisan
+            </Button>
+            <Button
+              variant="filled"
+              size="regular"
+              className="rounded-none bg-Charcoal"
+              ripple={false}
+              onClick={() => setUserType("Supply Chain")}
+            >
+              Supply Chain
             </Button>
           </div>
         </Box>
@@ -429,6 +450,89 @@ export const Signup = () => {
                 label="Gender"
                 className="rounded-none"
                 onChange={handleGenderChange}
+              />
+              <Input
+                type="password"
+                color="lightBlue"
+                size="regular"
+                value={password}
+                label="Password"
+                className="rounded-none"
+                onChange={handlePasswordChange}
+              />
+              <Input
+                type="password"
+                color="lightBlue"
+                size="regular"
+                value={confirmPassword}
+                label="Confirm Password"
+                className="rounded-none"
+                onChange={handleConfirmPasswordChange}
+              />
+            </>
+          ) : userType === "Supply Chain" ? (
+            <>
+              <Input
+                type="text"
+                color="lightBlue"
+                size="regular"
+                value={firstName}
+                label="First Name"
+                className="rounded-none"
+                onChange={handleFirstNameChange}
+              />
+              <Input
+                type="text"
+                color="lightBlue"
+                size="regular"
+                value={lastName}
+                label="Last Name"
+                className="rounded-none"
+                onChange={handleLastNameChange}
+              />
+              <Input
+                type="text"
+                color="lightBlue"
+                size="regular"
+                value={phoneNo}
+                label="Phone Number"
+                className="rounded-none"
+                onChange={handlePhoneNoChange}
+              />
+              <Input
+                type="email"
+                color="lightBlue"
+                size="regular"
+                value={email}
+                label="Email Address"
+                className="rounded-none"
+                onChange={handleEmailChange}
+              />
+              <Input
+                type="text"
+                color="lightBlue"
+                size="regular"
+                value={address}
+                label="Address"
+                className="rounded-none"
+                onChange={handleAddressChange}
+              />
+              <Input
+                type="text"
+                color="lightBlue"
+                size="regular"
+                value={gender}
+                label="Gender"
+                className="rounded-none"
+                onChange={handleGenderChange}
+              />
+              <Input
+                type="text"
+                color="lightBlue"
+                size="regular"
+                label='Company Name'
+                className="rounded-none"
+                onChange={handleCompanyChange}
               />
               <Input
                 type="password"

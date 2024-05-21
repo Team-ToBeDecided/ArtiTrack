@@ -4,8 +4,9 @@ import {
   MagnifyingGlassIcon,
   HeartIcon,
   ShoppingCartIcon,
+  HomeIcon,
 } from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import GoogleTranslate from "./GoogleTranslate";
 import { useContext } from "react";
 import { AuthContext } from "./AuthContext";
@@ -54,6 +55,8 @@ export const NavbarDefaut = () => {
         .dispatchEvent(new Event("change"));
     }
   };
+
+  const location = useLocation();
   return (
     <>
       {/* <GoogleTranslate language={lang} /> */}
@@ -89,7 +92,12 @@ export const NavbarDefaut = () => {
           اردو
         </Button>
       </Card>
-      <Card className="flex-row items-center justify-end h-12 rounded-none shadow-none bg-Sandalwood">
+      <Card className={`flex-row flex items-center ${location.pathname==='/'? 'justify-end': 'justify-between'} h-12 rounded-none shadow-none bg-Sandalwood`}>
+        {
+          location.pathname === '/' ? null :
+            <HomeIcon className="w-6 h-6 ml-5 text-white cursor-pointer" onClick={() => { navigate('/') }} />
+        }
+        <div className="flex flex-row items-center justify-end">
           {
             userRole === "wholesaler" ? (
               <Typography
@@ -160,33 +168,34 @@ export const NavbarDefaut = () => {
               Logout
             </Typography>
           ) : null}
-        
-        <Typography color="white" className="mr-3 font-heading">
-          {user ? `Hello, ${user}` : null}
-        </Typography>
-        {accessToken ? null : (
-          <>
-            <Typography
-              color="white"
-              onClick={() => navigate("/login")}
-              className="px-2 cursor-pointer"
-            >
-              Login
-            </Typography>
-            <Typography color="white">|</Typography>
-            <Typography
-              color="white"
-              onClick={() => navigate("/signup")}
-              className="px-2 mr-3 cursor-pointer"
-            >
-              SignUp
-            </Typography>
-          </>
 
-        )}
-        <MagnifyingGlassIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
-        <HeartIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
-        <ShoppingCartIcon className="w-6 h-6 mr-10 text-white cursor-pointer" />
+          <Typography color="white" className="mr-3 font-heading">
+            {user ? `Hello, ${user}` : null}
+          </Typography>
+          {accessToken ? null : (
+            <>
+              <Typography
+                color="white"
+                onClick={() => navigate("/login")}
+                className="px-2 cursor-pointer"
+              >
+                Login
+              </Typography>
+              <Typography color="white">|</Typography>
+              <Typography
+                color="white"
+                onClick={() => navigate("/signup")}
+                className="px-2 mr-3 cursor-pointer"
+              >
+                SignUp
+              </Typography>
+            </>
+
+          )}
+          <MagnifyingGlassIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
+          <HeartIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
+          <ShoppingCartIcon className="w-6 h-6 mr-10 text-white cursor-pointer" />
+        </div>
       </Card>
       {/* <div id="google_translate_element">
         </div> */}
