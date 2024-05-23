@@ -22,6 +22,13 @@ class RegistrationView(APIView):
         serializer.save()
         return Response(serializer.data)
 
+    def patch(self, request, pk=None):
+        user = User.objects.get(pk=pk)
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     # def post(self, request):
     #     serializer = UserSerializer(data=request.data)
     #     if serializer.is_valid():
@@ -31,3 +38,4 @@ class RegistrationView(APIView):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+

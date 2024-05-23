@@ -13,5 +13,6 @@ router = DefaultRouter()
 
 urlpatterns = [
     path('register/', RegistrationView.as_view(), name='register'),
+    path('update/<int:pk>/', RegistrationView.as_view(), name='update'),
     path('login/', MyTokenObtainPairView.as_view(), name='login'),
 ]

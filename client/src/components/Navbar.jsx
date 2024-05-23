@@ -14,7 +14,7 @@ import WalletConnector from "./WalletConnector";
 
 export const NavbarDefaut = () => {
   // const [lang, setLang] = React.useState("hi,ur,en");
-  const { accessToken, userData, userRole, user, logout } =
+  const { accessToken, userData, userRole, user, logOut } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const handleTranslateToUrdu = () => {
@@ -58,7 +58,7 @@ export const NavbarDefaut = () => {
   };
 
   const handleLogout = () => {
-    logout();
+    logOut();
     navigate("/");
   };
 
@@ -159,6 +159,18 @@ export const NavbarDefaut = () => {
             userRole === "consumer" ? (
               <Typography
                 variant="text"
+                onClick={() => navigate("/products")}
+                className="mx-3 text-white cursor-pointer font-heading text-md"
+                ripple={false}
+              >Products</Typography>
+            ) : (
+              null
+            )
+          }
+          {
+            userRole === "consumer" ? (
+              <Typography
+                variant="text"
                 onClick={() => navigate("/consumerProfile")}
                 className="mx-3 text-white cursor-pointer font-heading text-md"
                 ripple={false}
@@ -169,6 +181,18 @@ export const NavbarDefaut = () => {
           }
           {
             userRole === "supplyChain" ? (
+              <Typography
+                variant="text"
+                onClick={() => navigate("/orders")}
+                className="mx-3 text-white cursor-pointer font-heading text-md"
+                ripple={false}
+              >Orders</Typography>
+            ) : (
+              null
+            )
+          }
+          {
+            userRole === "consumer" ? (
               <Typography
                 variant="text"
                 onClick={() => navigate("/orders")}

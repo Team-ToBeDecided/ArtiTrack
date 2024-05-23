@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../constants/basUrl";
+import { useAuth } from "@arcana/auth-react";
 
 export const AuthContext = createContext(null);
 
@@ -62,7 +63,9 @@ export function AuthProvider({ children }) {
   console.log(user);
   console.log(accessToken);
 
-  const logout = () => {
+  const {logout, isLoggedIn} = useAuth();
+
+  const logOut = () => {
     setAccessToken(null);
     setUser(null);
     setUserRole(null);
@@ -71,6 +74,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("user");
     localStorage.removeItem("userRole");
     localStorage.removeItem("userData");
+    {isLoggedIn? logout(): null}
   };
 
   const lastDate = new Date(userData?.last_date);
@@ -78,7 +82,7 @@ export function AuthProvider({ children }) {
   const currentDate = new Date();
 
   if (lastDate < currentDate || isAccountActive === false) {
-    logout();
+    logOut();
     setError(
       "Your account has expired or deactivated. Please contact your administrator."
     );
@@ -88,14 +92,14 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     setTimeout(() => {
-      logout();
+      logOut();
       setError("Your session has expired. Please log in again.");
     }, session);
   }, [userData, logout, setError]);
 
   return (
     <AuthContext.Provider
-      value={{ accessToken, user, userRole, login, logout, userData, error }}
+      value={{ accessToken, user, userRole, login, logOut, userData, error }}
     >
       {/* {loading && <Loader />} */}
       {children}

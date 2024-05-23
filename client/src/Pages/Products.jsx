@@ -4,6 +4,7 @@ import ProductCard from '../components/ProductCard/ProductCard'
 import { Box } from '@mui/material'
 import axios from 'axios'
 import { BASE_URL } from '../constants/basUrl'
+import Header from '../components/Header/Header'
 const ProductRow = () => {
     const [products, setProducts] = React.useState([]);
     const getProducts = async () => {
@@ -36,17 +37,13 @@ const Products = () => {
         <Box className="flex justify-center w-full">
             <Box className="m-10">
                 <Box>
-                    <Typography color="Black" className="text-3xl font-semibold">
-                        Trending & New
-                    </Typography>
+                    <Header text={"Products"} />
                     <ProductRow />
                     <ProductRow />
                 </Box>
                 <Box height={30} />
                 <Box>
-                    <Typography color="Black" className="text-3xl font-semibold">
-                        New Arrivals
-                    </Typography>
+                <Header text={"New Arrials"} />
                     <ProductRow />
                     <ProductRow />
                 </Box>

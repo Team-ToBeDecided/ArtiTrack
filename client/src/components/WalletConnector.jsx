@@ -10,6 +10,8 @@ import { useAuth } from '@arcana/auth-react';
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
 import axios from 'axios';
+import { provider } from '../main';
+import { BASE_URL } from '../constants/basUrl';
 
 const style = {
     position: 'absolute',
@@ -27,16 +29,45 @@ const style = {
 
 export default function WalletConnector() {
     const [open, setOpen] = React.useState(false);
+    const [userWallet, setUserWallet] = React.useState();
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const { user, loading, connect, logout, isLoggedIn } = useAuth();
 
     const { accessToken, userData } = useContext(AuthContext);
 
+    async function getWalletAddress() {
+        const user = await provider.getUser();
+        const walletAddress = user.address;
+        setUserWallet(walletAddress)
+        console.log('User Wallet Address:', walletAddress);
+    }
+
+
+    const addUserWallet = async () => {
+        const response = await axios.patch(BASE_URL + `users/update/` + userData.id + `/`, {
+            wallet_address: userWallet
+        })
+        console.log(response);
+    }
+
+    console.log(userData)
+
 
     React.useEffect(() => {
+        if (isLoggedIn) {
+            if (userData.wallet_address === null) {
+                getWalletAddress();
+            }
             handleClose();
+        }
     }, [isLoggedIn])
+
+    React.useEffect(() => {
+        if (userWallet) {
+            addUserWallet();
+        }
+    }, [userWallet])
 
     console.log(user);
 
@@ -53,7 +84,7 @@ export default function WalletConnector() {
                     fontFamily: 'var(--heading)',
                     marginLeft: '5px'
                 }}>
-                    {isLoggedIn ?  "Wallet Connected" : 'Connect Wallet'}
+                    {isLoggedIn ? "Wallet Connected" : 'Connect Wallet'}
                 </Typography>
             </IconButton>
             <Modal

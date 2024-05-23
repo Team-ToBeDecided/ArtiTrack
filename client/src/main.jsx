@@ -7,7 +7,7 @@ import { ProvideAuth } from "@arcana/auth-react";
 
 const clientID = 'xar_test_fef9863227d590f5d115f0d2477c5ab7636ca5c8'
 
-const provider = new AuthProvider(clientID, {
+export const provider = new AuthProvider(clientID, {
   network: 'testnet', // Use 'testnet' for the test network
   theme: 'dark', // Use 'dark' for dark mode
   position: 'right', // Optional: position of the wallet UI
