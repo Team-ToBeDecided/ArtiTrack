@@ -77,7 +77,6 @@ const SupplyChainRequests = () => {
                     )
                 })}
             </Box>
-            <Auth />
         </>
     )
 }

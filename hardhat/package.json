@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile":""
+    "compile": ""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@openzeppelin/contracts": "^5.0.2",
     "@openzeppelin/hardhat-upgrades": "^2.2.1",
     "dotenv": "^16.3.1",
     "erc721a": "^4.2.3",

@@ -10,6 +10,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import GoogleTranslate from "./GoogleTranslate";
 import { useContext } from "react";
 import { AuthContext } from "./AuthContext";
+import WalletConnector from "./WalletConnector";
 
 export const NavbarDefaut = () => {
   // const [lang, setLang] = React.useState("hi,ur,en");
@@ -68,7 +69,7 @@ export const NavbarDefaut = () => {
       <Card className="flex-row items-center justify-end h-8 rounded-none bg-Charcoal">
         {/* <h1>Navbar</h1> */}
         {/* <Typography className="px-5" color="white">ENG | हिंदी | اردو</Typography> */}
-
+        <WalletConnector />
         <Button
           variant="filled"
           onClick={handleTranslateToEnglish}
