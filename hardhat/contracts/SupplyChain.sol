@@ -1,121 +1,111 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract SupplyChain {
-    enum State {
-        Created,
-        Paid,
-        Shipped,
-        Received
-    }
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
+contract SupplyChain is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
+    using Strings for uint256;
+
+    // Struct to hold order details
     struct Order {
+        uint256 id;
+        address merchant;
         address buyer;
-        address seller;
-        uint256 price;
-        State state;
+        uint256 amount;
+        bool isCompleted;
     }
 
+    // Order counter
+    uint256 public orderCounter;
+
+    // Mapping from order ID to Order details
     mapping(uint256 => Order) public orders;
-    uint256 public orderCount;
 
-    modifier onlyBuyer(uint256 orderId) {
-        require(
-            msg.sender == orders[orderId].buyer,
-            "Only the buyer can call this function"
-        );
-        _;
-    }
+    // Event when a new order is created
+    event OrderCreated(uint256 orderId, address indexed merchant, address indexed buyer, uint256 amount);
+    // Event when NFT is transferred to a delivery partner
+    event NFTTransferred(uint256 orderId, address indexed from, address indexed to);
+    // Event when an order is completed and escrow is released
+    event OrderCompleted(uint256 orderId);
 
-    modifier onlySeller(uint256 orderId) {
-        require(
-            msg.sender == orders[orderId].seller,
-            "Only the seller can call this function"
-        );
-        _;
-    }
+    constructor() ERC721("SupplyChainNFT", "SCNFT") {}
 
-    modifier inState(uint256 orderId, State targetState) {
-        require(
-            orders[orderId].state == targetState,
-            "Invalid state transition"
-        );
-        _;
-    }
+    // Create a new order
+    function createOrder(address _merchant, address _buyer, uint256 _amount, string memory _tokenURI) public payable {
+        require(msg.value == _amount, "Amount sent must be equal to order amount");
 
-    event OrderCreated(
-        uint256 orderId,
-        address buyer,
-        address seller,
-        uint256 price
-    );
-    event OrderPaid(uint256 orderId);
-    event OrderShipped(uint256 orderId);
-    event OrderReceived(uint256 orderId);
+        orderCounter++;
+        uint256 orderId = orderCounter;
 
-    function createOrder(address _seller) external payable {
-        require(msg.sender != _seller, "Buyer and seller cannot be the same");
-        require(msg.value > 0, "Price must be greater than zero");
+        // Mint the NFT
+        _mint(_merchant, orderId);
+        _setTokenURI(orderId, _tokenURI);
 
-        uint256 orderId = orderCount++;
+        // Store order details
         orders[orderId] = Order({
-            buyer: msg.sender,
-            seller: _seller,
-            price: msg.value,
-            state: State.Created
+            id: orderId,
+            merchant: _merchant,
+            buyer: _buyer,
+            amount: _amount,
+            isCompleted: false
         });
 
-        emit OrderCreated(orderId, msg.sender, _seller, msg.value);
+        emit OrderCreated(orderId, _merchant, _buyer, _amount);
     }
 
-    function payOrder(
-        uint256 orderId
-    ) external payable onlyBuyer(orderId) inState(orderId, State.Created) {
-        require(msg.value == orders[orderId].price, "Incorrect payment amount");
-
-        orders[orderId].state = State.Paid;
-        emit OrderPaid(orderId);
+    // Transfer NFT to delivery partner
+    function transferNFT(address _from, address _to, uint256 _orderId) public {
+        require(_isApprovedOrOwner(_msgSender(), _orderId), "Caller is not owner nor approved");
+        _transfer(_from, _to, _orderId);
+        emit NFTTransferred(_orderId, _from, _to);
     }
 
-    function shipOrder(
-        uint256 orderId
-    ) external onlySeller(orderId) inState(orderId, State.Paid) {
-        orders[orderId].state = State.Shipped;
-        emit OrderShipped(orderId);
+    // Complete the order and release escrow
+    function completeOrder(uint256 _orderId) public {
+        Order storage order = orders[_orderId];
+        require(_msgSender() == order.buyer, "Only buyer can complete the order");
+        require(order.isCompleted == false, "Order is already completed");
+        require(ownerOf(_orderId) == order.buyer, "NFT must be owned by buyer to complete order");
+
+        order.isCompleted = true;
+
+        // Release the escrow payment to the merchant
+        payable(order.merchant).transfer(order.amount);
+
+        emit OrderCompleted(_orderId);
     }
 
-    function receiveOrder(
-        uint256 orderId
-    ) external onlyBuyer(orderId) inState(orderId, State.Shipped) {
-        orders[orderId].state = State.Received;
-        payable(orders[orderId].seller).transfer(orders[orderId].price);
-        emit OrderReceived(orderId);
-    }
-
-    // Escrow functionality
-    function releaseEscrow(
-        uint256 orderId
-    ) external onlySeller(orderId) inState(orderId, State.Received) {
-        payable(orders[orderId].seller).transfer(orders[orderId].price);
-        orders[orderId].state = State.Created;
-    }
-
-    function refundEscrow(
-        uint256 orderId
-    ) external onlySeller(orderId) inState(orderId, State.Received) {
-        payable(orders[orderId].buyer).transfer(orders[orderId].price);
-        orders[orderId].state = State.Created;
-    }
-
-    // Retrieve order details
-    function getOrderDetails(
-        uint256 orderId
-    )
-        external
-        view
-        returns (address buyer, address seller, uint256 price, State state)
+    // The following functions are overrides required by Solidity.
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)
+        internal
+        override(ERC721, ERC721Enumerable)
     {
-        Order storage order = orders[orderId];
-        return (order.buyer, order.seller, order.price, order.state);
+        super._beforeTokenTransfer(from, to, tokenId, batchSize);
+    }
+
+    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+        super._burn(tokenId);
+    }
+
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (string memory)
+    {
+        return super.tokenURI(tokenId);
+    }
+
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override(ERC721, ERC721Enumerable)
+        returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
     }
 }
