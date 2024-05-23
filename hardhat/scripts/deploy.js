@@ -7,18 +7,17 @@
 const hre = require("hardhat");
 
 async function main() {
-  const tokenName = "SupplyChainNFT";
-  const tokenSymbol = "SCNFT";
-
   const SupplyChain = await ethers.getContractFactory("SupplyChain");
-  const supplyChain = await SupplyChain.deploy(tokenName, tokenSymbol);
+  const supplyChain = await SupplyChain.deploy();
 
   console.log("SupplyChain address:", supplyChain.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

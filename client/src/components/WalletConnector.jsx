@@ -7,6 +7,9 @@ import { IconButton } from '@mui/material';
 import { WalletIcon } from '@heroicons/react/24/outline';
 import { Auth } from '@arcana/auth-react';
 import { useAuth } from '@arcana/auth-react';
+import { useContext } from 'react';
+import { AuthContext } from './AuthContext';
+import axios from 'axios';
 
 const style = {
     position: 'absolute',
@@ -28,10 +31,11 @@ export default function WalletConnector() {
     const handleClose = () => setOpen(false);
     const { user, loading, connect, logout, isLoggedIn } = useAuth();
 
+    const { accessToken, userData } = useContext(AuthContext);
+
+
     React.useEffect(() => {
-        if (isLoggedIn) {
             handleClose();
-        }
     }, [isLoggedIn])
 
     console.log(user);

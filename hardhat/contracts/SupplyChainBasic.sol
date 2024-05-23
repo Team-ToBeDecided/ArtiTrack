@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract SupplyChain {
+contract SupplyChainBasic {
     enum State {
         Created,
         Paid,

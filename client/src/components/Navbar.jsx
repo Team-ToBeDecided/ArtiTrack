@@ -69,7 +69,10 @@ export const NavbarDefaut = () => {
       <Card className="flex-row items-center justify-end h-8 rounded-none bg-Charcoal">
         {/* <h1>Navbar</h1> */}
         {/* <Typography className="px-5" color="white">ENG | हिंदी | اردو</Typography> */}
-        <WalletConnector />
+        {
+          accessToken ? (<WalletConnector />) : null
+        }
+        {/* <WalletConnector /> */}
         <Button
           variant="filled"
           onClick={handleTranslateToEnglish}
@@ -98,7 +101,7 @@ export const NavbarDefaut = () => {
           اردو
         </Button>
       </Card>
-      <Card className={`flex-row flex items-center ${location.pathname==='/'? 'justify-end': 'justify-between'} h-12 rounded-none shadow-none bg-Sandalwood`}>
+      <Card className={`flex-row flex items-center ${location.pathname === '/' ? 'justify-end' : 'justify-between'} h-12 rounded-none shadow-none bg-Sandalwood`}>
         {
           location.pathname === '/' ? null :
             <HomeIcon className="w-6 h-6 ml-5 text-white cursor-pointer" onClick={() => { navigate('/') }} />
@@ -224,7 +227,7 @@ export const NavbarDefaut = () => {
           )}
           <MagnifyingGlassIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
           <HeartIcon className="w-6 h-6 mr-5 text-white cursor-pointer" />
-          <ShoppingCartIcon onClick={()=>{navigate('/cart')}} className="w-6 h-6 mr-10 text-white cursor-pointer" />
+          <ShoppingCartIcon onClick={() => { navigate('/cart') }} className="w-6 h-6 mr-10 text-white cursor-pointer" />
         </div>
       </Card>
       {/* <div id="google_translate_element">
