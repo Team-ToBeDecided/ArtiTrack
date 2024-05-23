@@ -54,6 +54,7 @@ class Order(models.Model):
     delievered = models.BooleanField(default=False)
     delivery_address = models.CharField(max_length=2000)
     supplier = models.ForeignKey('userconf.User', related_name='orders_supplied', on_delete=models.CASCADE, null=True, blank=True)
+    chain_id = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return f"Order {self.id} by {self.user.email}"

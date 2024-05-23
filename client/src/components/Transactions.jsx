@@ -9,20 +9,6 @@ export const TransactionContext = createContext(null);
 
 export function TransactionsProvider({ children }) {
 
-    // const clientID = 'xar_test_fef9863227d590f5d115f0d2477c5ab7636ca5c8'
-
-    // const ArcanaProvider = new AuthProvider(clientID, {
-    //     network: 'testnet',
-    //     theme: 'dark',
-    //     position: 'right',
-    //     alwaysVisible: true,
-    //     chainConfig: {
-    //         chainId: '80002', // Example: Polygon chain ID
-    //         rpcUrl: 'https://rpc-amoy.polygon.technology/' // Example: RPC URL for Polygon Mumbai testnet
-    //     }
-    // });
-
-    // console.log('Arcana Provider:', ArcanaProvider);
     let provider, signer;
 
     async function initializeProviderAndSigner() {
@@ -51,7 +37,7 @@ export function TransactionsProvider({ children }) {
     const abi = CONTRACT_ABI;
     const tokenURI = 'https://gateway.pinata.cloud/ipfs/QmPsK8LekiJ4CXna9fYxqzBVuQra56EJMMyR3YwNVrMABG';
 
-    async function createOrder(buyerAddress, amount) {
+    async function createOrder(merchant, amount) {
         try {
             // Ensure signer is available
             if (!signer) {
@@ -80,8 +66,31 @@ export function TransactionsProvider({ children }) {
         }
     }
 
+    async function trackOrder(orderId) {
+    try {
+        // Ensure signer is available
+        if (!signer) {
+            console.error('Signer is not initialized');
+            return;
+        }
+
+        // Create a contract instance
+        const contract = new ethers.Contract(contractAddress, abi, signer);
+        console.log('Contract instance created:', contract);
+
+        // Call the trackOrder function
+        const result = await contract.trackOrder(orderId);
+
+        console.log('Order tracked:', result);
+        return result;
+    } catch (error) {
+        console.error('Error tracking order:', error);
+    }
+}
+
+
     return (
-        <TransactionContext.Provider value={{ createOrder }}>
+        <TransactionContext.Provider value={{ createOrder, trackOrder }}>
             {children}
         </TransactionContext.Provider>
     );

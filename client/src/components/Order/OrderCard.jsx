@@ -20,7 +20,7 @@ export default function OrderCard(order) {
 
     const navigate = useNavigate();
 
-    const {createOrder} = useContext(TransactionContext);
+    const {createOrder, trackOrder} = useContext(TransactionContext);
 
     const { userData } = useContext(AuthContext);
 
@@ -39,8 +39,10 @@ export default function OrderCard(order) {
         console.log(response);
     }
 
+
     useEffect(() => {
         getProduct();
+        trackOrder(1)
     }, [order]);
 
     useEffect(() => {

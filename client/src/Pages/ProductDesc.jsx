@@ -20,6 +20,7 @@ import axios from 'axios'
 import { BASE_URL } from '../constants/basUrl';
 import { AuthContext } from '../components/AuthContext';
 import { useContext } from 'react';
+import { TransactionContext } from '../components/Transactions';
 
 
 const Breakerline = ({ bgcolor, width }) => {
@@ -99,6 +100,8 @@ const ProductImage = ({ product }) => {
 const Product2 = () => {
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
+    const [orders, setOrders] = useState([]);
+    const [artisanWallet, setArtisanWallet] = useState([]);
     const { id } = useParams();
 
     const { userData } = useContext(AuthContext);
@@ -123,9 +126,32 @@ const Product2 = () => {
         }
     };
 
+    const getOrders = async () => {
+        try {
+            const response = await axios.get(BASE_URL + `products/order/`);
+            setOrders(response.data);
+            console.log("ORDER LIST", response.data);
+        }
+        catch (error) {
+            console.error('Error fetching orders:', error)
+        }
+    }
+
+    const getArtisanData = async () => {
+        try {
+            const response = await axios.get(BASE_URL + `users/update/` + product.artisan);
+            setArtisanWallet(response.data.wallet_address);
+            console.log("Artisan Address:", response.data.wallet_address);
+        } catch (error) {
+            console.error('Error fetching orders:', error)
+        }
+    }
+
     useEffect(() => {
         getProduct();
         getProducts();
+        getOrders();
+        getArtisanData();
     }, [id]);
 
     const [counter, setCounter] = useState(1)
@@ -144,22 +170,29 @@ const Product2 = () => {
 
     const md = useMediaQuery('(min-width:1024px)')
 
+    const { createOrder } = useContext(TransactionContext);
+
     const placeOrder = async () => {
-        const data = {
-            amount: 0.005,
-            delivery_address: "Mumbai Maharashtra India",
-            product: product.id,
-            artisan: product.artisan,
-            user: userData.id,
-        };
-        console.log("data: ", data);
-    try {
-        const response = await axios.post(`${BASE_URL}/products/order/`, data);
-        console.log('Order placed:', response);
-    } catch (error) {
-        console.error('Error placing order:', error);
+        try {
+            await createOrder(artisanWallet, product.price * 0.00001);
+
+            const data = {
+                amount: product.price * 0.00001,
+                delivery_address: "Mumbai Maharashtra India",
+                product: product.id,
+                artisan: product.artisan,
+                user: userData.id,
+            };
+            console.log("data: ", data);
+            const response = await axios.post(`${BASE_URL}/products/order/`, data);
+            console.log('Order placed:', response);
+        } catch (error) {
+            console.error('Error placing order:', error);
+        }
     }
-}
+
+
+    console.log("Previous ID", orders[orders.length - 1]?.id)
 
 
     return (
@@ -324,7 +357,7 @@ const Product2 = () => {
                                     </Button>
                                 </Box>
                             </Box>
-                            <CustomButton text='Place Order' bgcolor="black" click={()=>{placeOrder()}} />
+                            <CustomButton text='Place Order' bgcolor="black" click={() => { placeOrder() }} />
                         </Box>
                     </Box>
                     <Box height={20} />

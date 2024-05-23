@@ -5,15 +5,26 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.http import Http404
 
 # Create your views here.
 
 class RegistrationView(APIView):
     authentication_classes = (TokenAuthentication,)
 
-    def get(self, request):
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
+    def get_object(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk=None, format=None):
+        if pk:
+            user = self.get_object(pk)
+            serializer = UserSerializer(user)
+        else:
+            users = User.objects.all()
+            serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
 
     def post(self, request):
