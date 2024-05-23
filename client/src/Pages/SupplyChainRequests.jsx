@@ -8,6 +8,7 @@ import { AuthContext } from '../components/AuthContext';
 import { useState } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../constants/basUrl';
+import { Auth } from '@arcana/auth-react';
 
 
 
@@ -76,6 +77,7 @@ const SupplyChainRequests = () => {
                     )
                 })}
             </Box>
+            <Auth />
         </>
     )
 }
