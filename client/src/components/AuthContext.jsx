@@ -74,7 +74,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("user");
     localStorage.removeItem("userRole");
     localStorage.removeItem("userData");
-    {isLoggedIn? logout(): null}
+    logout();
   };
 
   const lastDate = new Date(userData?.last_date);

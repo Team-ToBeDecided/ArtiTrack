@@ -10,7 +10,8 @@ import { useAuth } from '@arcana/auth-react';
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
 import axios from 'axios';
-import { provider } from '../main';
+// import { ArcanaProvider  } from './Transactions';
+import { ArcanaProvider } from '../main';
 import { BASE_URL } from '../constants/basUrl';
 
 const style = {
@@ -37,7 +38,7 @@ export default function WalletConnector() {
     const { accessToken, userData } = useContext(AuthContext);
 
     async function getWalletAddress() {
-        const user = await provider.getUser();
+        const user = await ArcanaProvider.getUser();
         const walletAddress = user.address;
         setUserWallet(walletAddress)
         console.log('User Wallet Address:', walletAddress);

@@ -12,12 +12,15 @@ import { useEffect, useState } from 'react';
 import SmallButton from '../CustomButton/SmallButton';
 import { AuthContext } from '../AuthContext';
 import { useContext } from 'react';
+import { TransactionContext } from '../Transactions';
 
 export default function OrderCard(order) {
     const [product, setProduct] = useState({});
     const [productImage, setProductImage] = useState('');
 
     const navigate = useNavigate();
+
+    const {createOrder} = useContext(TransactionContext);
 
     const { userData } = useContext(AuthContext);
 
@@ -84,7 +87,11 @@ export default function OrderCard(order) {
             }}>
 
                 {userData.role === 'consumer' ?
-                    <SmallButton text={"Track Order"} click={() => { navigate(`/orders/${order.order.id}`) }} bgcolor={"var(--dark-blue)"} />
+                    <SmallButton
+                        text={"Track Order"}
+                        click={() => { createOrder(userData.wallet_address, "0.02") }}
+                        bgcolor={"var(--dark-blue)"}
+                    />
                     : userData.role === 'supplyChain' ?
                         <SmallButton text={"Start Supplying"} click={() => { createRequest() }} bgcolor={"var(--dark-blue)"} />
                         : null}

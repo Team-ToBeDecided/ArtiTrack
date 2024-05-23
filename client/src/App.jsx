@@ -10,6 +10,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./Router";
 import GoogleTranslate from "./components/GoogleTranslate";
 import { AuthProvider } from "./components/AuthContext";
+import { TransactionsProvider } from "./components/Transactions";
 
 
 function App() {
@@ -18,17 +19,19 @@ function App() {
   return (
     <>
       {/* <GoogleTranslate /> */}
-      <AuthProvider>
-      <BrowserRouter>
-        <div id="google_translate_element" className=" h-0">
-          {/* Other content */}
-          <NavbarDefaut />
-          {/* <AuthProvider> */}
-          <AppRoutes />
-          {/* </AuthProvider> */}
-        </div>
-      </BrowserRouter>
-      </AuthProvider>
+      <TransactionsProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <div id="google_translate_element" className=" h-0">
+              {/* Other content */}
+              <NavbarDefaut />
+              {/* <AuthProvider> */}
+              <AppRoutes />
+              {/* </AuthProvider> */}
+            </div>
+          </BrowserRouter>
+        </AuthProvider>
+      </TransactionsProvider>
     </>
   );
 }
