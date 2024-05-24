@@ -110,6 +110,8 @@ const Product2 = () => {
         try {
             const response = await axios.get(`${BASE_URL}/products/product/${id}`);
             setProduct(response.data);
+            console.log("Artisan ID:", response?.data);
+            getArtisanData(response?.data?.artisan);
         } catch (error) {
             console.error('Error fetching products:', error)
         }
@@ -119,7 +121,6 @@ const Product2 = () => {
         try {
             const response = await axios.get(`${BASE_URL}/products/product`);
             setProducts(response.data);
-            getArtisanData(response.data.artisan); // Call getArtisanData here
         } catch (error) {
             console.error('Error fetching products:', error)
         }
@@ -140,7 +141,7 @@ const Product2 = () => {
         try {
             const response = await axios.get(BASE_URL + `users/update/` + artisanId);
             setArtisanWallet(response.data.wallet_address);
-            console.log("Artisans Address:", response.data.wallet_address);
+            console.log("Artisans Address:", response?.data?.wallet_address);
         } catch (error) {
             console.error('Error fetching Artisan Data :', error)
         }
