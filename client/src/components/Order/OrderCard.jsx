@@ -42,12 +42,13 @@ export default function OrderCard(order) {
 
     useEffect(() => {
         getProduct();
-        trackOrder(1)
     }, [order]);
 
     useEffect(() => {
         getProductImage();
     }, [product])
+
+    
 
     const createRequest = async () => {
         const response = await axios.post(BASE_URL + `products/supplyrequest/`, {
@@ -91,7 +92,7 @@ export default function OrderCard(order) {
                 {userData.role === 'consumer' ?
                     <SmallButton
                         text={"Track Order"}
-                        click={() => { createOrder(userData.wallet_address, "0.02") }}
+                        click={() => { trackOrder(order.order.id) }}
                         bgcolor={"var(--dark-blue)"}
                     />
                     : userData.role === 'supplyChain' ?

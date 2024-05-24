@@ -37,7 +37,7 @@ export function TransactionsProvider({ children }) {
     const abi = CONTRACT_ABI;
     const tokenURI = 'https://gateway.pinata.cloud/ipfs/QmPsK8LekiJ4CXna9fYxqzBVuQra56EJMMyR3YwNVrMABG';
 
-    async function createOrder(merchant, amount) {
+    async function createOrder(buyerAddress, amount) {
         try {
             // Ensure signer is available
             if (!signer) {

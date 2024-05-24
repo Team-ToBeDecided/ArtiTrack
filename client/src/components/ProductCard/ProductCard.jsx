@@ -12,14 +12,14 @@ export function ProductCard(
     { product }
 ) {
     // const dispatch = useDispatch();
-    console.log(product)
+    // console.log(product)
     const navigate = useNavigate();
 
     const [img, setImg] = React.useState('')
 
     const getImage = async () => {
         const response = await axios.get(BASE_URL + `/products/productimage/?search=${product.id}`)
-        console.log(response.data)
+        // console.log(response.data)
         setImg(response.data[0].image)
     }
 

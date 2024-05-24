@@ -68,7 +68,7 @@ const ProductImage = ({ product }) => {
 
     const getImage = async () => {
         const response = await axios.get(BASE_URL + `/products/productimage/?search=${product.id}`);
-        console.log('Response data:', response.data); // Log the entire response data
+        // console.log('Response data:', response.data); // Log the entire response data
         setImg(response.data);
     };
 
@@ -80,7 +80,7 @@ const ProductImage = ({ product }) => {
         <Box className="flex flex-col w-full gap-10 m-0 lg:ml-20">
             <Box>
                 {img && img[0] && (
-                    <img src={img[0].image} className='w-[400px] h-[600px]' alt="" onLoad={() => console.log('Image loaded')} onError={() => console.log('Image load error')} /> // Log when the image is loaded or if there's an error
+                    <img src={img[0].image} className='w-[400px] h-[600px]' onError={() => console.log('Image load error')} /> // Log when the image is loaded or if there's an error
                 )}
             </Box>
             <Box className="flex gap-10">
@@ -101,12 +101,10 @@ const Product2 = () => {
     const [product, setProduct] = useState([]);
     const [products, setProducts] = useState([]);
     const [orders, setOrders] = useState([]);
-    const [artisanWallet, setArtisanWallet] = useState([]);
+    const [artisanWallet, setArtisanWallet] = useState();
     const { id } = useParams();
 
     const { userData } = useContext(AuthContext);
-
-    console.log('User:', userData);
 
     const getProduct = async () => {
         try {
@@ -121,6 +119,7 @@ const Product2 = () => {
         try {
             const response = await axios.get(`${BASE_URL}/products/product`);
             setProducts(response.data);
+            getArtisanData(response.data.artisan); // Call getArtisanData here
         } catch (error) {
             console.error('Error fetching products:', error)
         }
@@ -137,13 +136,13 @@ const Product2 = () => {
         }
     }
 
-    const getArtisanData = async () => {
+    const getArtisanData = async (artisanId) => {
         try {
-            const response = await axios.get(BASE_URL + `users/update/` + product.artisan);
+            const response = await axios.get(BASE_URL + `users/update/` + artisanId);
             setArtisanWallet(response.data.wallet_address);
-            console.log("Artisan Address:", response.data.wallet_address);
+            console.log("Artisans Address:", response.data.wallet_address);
         } catch (error) {
-            console.error('Error fetching orders:', error)
+            console.error('Error fetching Artisan Data :', error)
         }
     }
 
@@ -151,8 +150,8 @@ const Product2 = () => {
         getProduct();
         getProducts();
         getOrders();
-        getArtisanData();
     }, [id]);
+
 
     const [counter, setCounter] = useState(1)
     const [currentImg, setCurrentImg] = useState(0)
@@ -174,7 +173,7 @@ const Product2 = () => {
 
     const placeOrder = async () => {
         try {
-            await createOrder(artisanWallet, product.price * 0.00001);
+            await createOrder(artisanWallet, (product.price * 0.00001).toString());
 
             const data = {
                 amount: product.price * 0.00001,
@@ -182,6 +181,7 @@ const Product2 = () => {
                 product: product.id,
                 artisan: product.artisan,
                 user: userData.id,
+                chainId: orders[orders.length - 1]?.id
             };
             console.log("data: ", data);
             const response = await axios.post(`${BASE_URL}/products/order/`, data);
