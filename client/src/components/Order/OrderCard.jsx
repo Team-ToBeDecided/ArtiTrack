@@ -68,7 +68,7 @@ export default function OrderCard(order) {
    const handleDeliver = () => {
     deliverOrder(order.order.id)
         .then(() => {
-            return axios.patch(BASE_URL + `products/order/` + order.order.id, {
+            return axios.patch(BASE_URL + `products/order/` + order.order.id + `/`, {
                 delivered: true
             });
         })
