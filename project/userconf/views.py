@@ -6,9 +6,20 @@ from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
+class UserSearchView(APIView):
+    authentication_classes = (TokenAuthentication,)
+
+    def get(self, request, wallet_address, format=None):
+        try:
+            user = User.objects.get(wallet_address=wallet_address)
+            serializer = UserSerializer(user)
+            return Response(serializer.data)
+        except ObjectDoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
 class RegistrationView(APIView):
     authentication_classes = (TokenAuthentication,)
 
