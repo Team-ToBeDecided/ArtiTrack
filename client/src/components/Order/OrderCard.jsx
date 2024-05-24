@@ -13,6 +13,7 @@ import SmallButton from '../CustomButton/SmallButton';
 import { AuthContext } from '../AuthContext';
 import { useContext } from 'react';
 import { TransactionContext } from '../Transactions';
+import OrderDetailsModal from '../Modals/OrderTrackingModal';
 
 export default function OrderCard(order) {
     const [product, setProduct] = useState({});
@@ -48,11 +49,12 @@ export default function OrderCard(order) {
         getProductImage();
     }, [product])
 
-    
+    console.log(userData.wallet_address);
+
 
     const createRequest = async () => {
         const response = await axios.post(BASE_URL + `products/supplyrequest/`, {
-            new_supplier_address: "0x1234567890",
+            new_supplier_address: userData.wallet_address,
             artisan: order.order.artisan,
             order: order.order.id,
             amount: product.price,
@@ -60,6 +62,8 @@ export default function OrderCard(order) {
         console.log(response);
         alert('Request Created');
     }
+
+    const amount = (2500*0.00001).toString();
 
     return (
         <Card sx={{ maxWidth: 450 }}>
@@ -90,11 +94,8 @@ export default function OrderCard(order) {
             }}>
 
                 {userData.role === 'consumer' ?
-                    <SmallButton
-                        text={"Track Order"}
-                        click={() => { trackOrder(order.order.id) }}
-                        bgcolor={"var(--dark-blue)"}
-                    />
+                    <OrderDetailsModal orderId={order.order.id} />
+                    // <SmallButton text={"Track Order"} click={() => { createOrder("0x3cB51a218772fe46c415e5FE5Ee16cc74999d172", amount) }} bgcolor={"var(--dark-blue)"} />
                     : userData.role === 'supplyChain' ?
                         <SmallButton text={"Start Supplying"} click={() => { createRequest() }} bgcolor={"var(--dark-blue)"} />
                         : null}

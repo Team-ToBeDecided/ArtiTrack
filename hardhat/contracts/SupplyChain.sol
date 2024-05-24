@@ -22,16 +22,16 @@ contract SupplyChain is ERC721URIStorage {
     constructor() ERC721("SupplyChainOrder", "SCO") {}
 
     function createOrder(
-        address _buyer,
+        address _merchant,
         uint256 _amount,
         string memory _tokenURI
     ) external payable returns (uint256) {
         require(msg.value == _amount, "Payment does not match order amount");
         uint256 orderId = nextOrderId++;
-        orders[orderId] = Order(orderId, msg.sender, _buyer, _amount, false);
-        _mint(msg.sender, orderId);
+        orders[orderId] = Order(orderId, _merchant, msg.sender, _amount, false);
+        _mint(_merchant, orderId);
         _setTokenURI(orderId, _tokenURI);
-        balances[msg.sender] += _amount;
+        balances[_merchant] += _amount;
         return orderId;
     }
 
@@ -99,4 +99,20 @@ contract SupplyChain is ERC721URIStorage {
             ownerOf(_orderId) // Add this line
         );
     }
+
+    // function migrateOrder(
+    //     uint256 _orderId,
+    //     address _merchant,
+    //     address _buyer,
+    //     uint256 _amount,
+    //     bool _isCompleted
+    // ) public {
+    //     orders[_orderId] = Order(
+    //         _orderId,
+    //         _merchant,
+    //         _buyer,
+    //         _amount,
+    //         _isCompleted
+    //     );
+    // }
 }

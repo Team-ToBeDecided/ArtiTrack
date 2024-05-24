@@ -1,4 +1,4 @@
-import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../utils/constants";
+import { CONTRACT_ABI, NEW_CONTRACT_ADDRESS } from "../utils/constants";
 import { ethers } from 'ethers';
 import { ArcanaProvider } from "../main";
 import { AuthProvider } from "@arcana/auth"
@@ -33,39 +33,38 @@ export function TransactionsProvider({ children }) {
         console.log('Provider and Signer initialized');
     }, []);
 
-    const contractAddress = CONTRACT_ADDRESS;
+    const contractAddress = NEW_CONTRACT_ADDRESS;
     const abi = CONTRACT_ABI;
     const tokenURI = 'https://gateway.pinata.cloud/ipfs/QmPsK8LekiJ4CXna9fYxqzBVuQra56EJMMyR3YwNVrMABG';
 
-    async function createOrder(buyerAddress, amount) {
-        try {
-            // Ensure signer is available
-            if (!signer) {
-                console.error('Signer is not initialized');
-                return;
-            }
-
-            // Create a contract instance
-            const contract = new ethers.Contract(contractAddress, abi, signer);
-            console.log('Contract instance created:', contract);
-
-            // Define transaction overrides
-            const overrides = {
-                value: ethers.utils.parseEther(amount),
-            };
-
-            // Call the createOrder function
-            const tx = await contract.createOrder(buyerAddress, overrides.value, tokenURI, overrides);
-
-            // Wait for the transaction to be mined
-            const receipt = await tx.wait();
-
-            console.log('Transaction successful:', receipt);
-        } catch (error) {
-            console.error('Error creating order:', error);
+    async function createOrder(merchantAddress, amount) {
+    try {
+        // Ensure signer is available
+        if (!signer) {
+            console.error('Signer is not initialized');
+            return;
         }
-    }
 
+        // Create a contract instance
+        const contract = new ethers.Contract(contractAddress, abi, signer);
+        console.log('Contract instance created:', contract);
+
+        // Define transaction overrides
+        const overrides = {
+            value: ethers.utils.parseEther(amount),
+        };
+
+        // Call the createOrder function
+        const tx = await contract.createOrder(merchantAddress, overrides.value, tokenURI, overrides);
+
+        // Wait for the transaction to be mined
+        const receipt = await tx.wait();
+
+        console.log('Transaction successful:', receipt);
+    } catch (error) {
+        console.error('Error creating order:', error);
+    }
+}
     async function trackOrder(orderId) {
     try {
         // Ensure signer is available

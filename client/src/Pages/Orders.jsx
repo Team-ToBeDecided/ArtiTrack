@@ -43,6 +43,13 @@ const OrderPage = () => {
                     )
                 })}
             </Box>
+            {userData.role == "supplyChain" ? 
+            <>
+                <div className="flex p-16 justify-center">
+                    <Header text="Supply Chain Request" />
+                </div>
+
+            </> : null}
         </>
     )
 }

@@ -22,7 +22,7 @@ const SupplyChainRequests = () => {
     const getSupplyRequests = async () => {
         const response = await axios.get(BASE_URL + `products/supplyrequest/${userData.role == "artisan" ? `?search=${userData.id}` : ``}`);
         setSupplyRequests(response.data);
-        console.log(response.data);
+        console.log("Supply Requests:",response.data);
     }
 
     const getOrderDetails = async () => {
@@ -68,11 +68,13 @@ const SupplyChainRequests = () => {
             }}>
                 {products.map((product,index) => {
                     return (
-                        <Card className='flex flex-col items-stat justify-center gap-5 p-5 max-w-xl rounded none'>
+                        <Card className='flex flex-col items-stat justify-center gap-5 p-5 max-w-2xl rounded none'>
                             {/* <img src="https://img.icons8.com/ios/452/box.png" className='h-24 rounded-xl border-4' alt="box" /> */}
                             <h2 className='text-5xl'>{product.name}</h2>
                             <h2 className='text-3xl'>{product.price}</h2>
-                            <SmallButton text='Transfer' click={() => { }} bgcolor='var(--dark-blue)' />
+                            <h2 className='text-2xl'>Supplier Address:</h2>
+                            <h2 className='text-2xl font-serif'>{supplyRequests[index].new_supplier_address}</h2>
+                            <SmallButton text='Transfer Token' click={() => { }} bgcolor='var(--dark-blue)' />
                         </Card>
                     )
                 })}
