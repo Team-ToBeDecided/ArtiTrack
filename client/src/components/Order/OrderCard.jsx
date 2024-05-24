@@ -21,7 +21,7 @@ export default function OrderCard(order) {
 
     const navigate = useNavigate();
 
-    const {createOrder, trackOrder} = useContext(TransactionContext);
+    const { createOrder, trackOrder, deliverOrder } = useContext(TransactionContext);
 
     const { userData } = useContext(AuthContext);
 
@@ -49,8 +49,8 @@ export default function OrderCard(order) {
         getProductImage();
     }, [product])
 
-    console.log(userData.wallet_address);
 
+    console.log("Systum",userData.id === order.order.supplier);
 
     const createRequest = async () => {
         const response = await axios.post(BASE_URL + `products/supplyrequest/`, {
@@ -63,7 +63,26 @@ export default function OrderCard(order) {
         alert('Request Created');
     }
 
-    const amount = (2500*0.00001).toString();
+    const amount = (2500 * 0.00001).toString();
+
+   const handleDeliver = () => {
+    deliverOrder(order.order.id)
+        .then(() => {
+            return axios.patch(BASE_URL + `products/order/` + order.order.id, {
+                delivered: true
+            });
+        })
+        .then(response => {
+            console.log(response);
+            alert('Order Delivered');
+        })
+        .catch(error => {
+            console.error('Error delivering order:', error);
+        });
+}
+
+
+
 
     return (
         <Card sx={{ maxWidth: 450 }}>
@@ -97,7 +116,11 @@ export default function OrderCard(order) {
                     <OrderDetailsModal orderId={order.order.id} />
                     // <SmallButton text={"Track Order"} click={() => { createOrder("0x3cB51a218772fe46c415e5FE5Ee16cc74999d172", amount) }} bgcolor={"var(--dark-blue)"} />
                     : userData.role === 'supplyChain' ?
-                        <SmallButton text={"Start Supplying"} click={() => { createRequest() }} bgcolor={"var(--dark-blue)"} />
+                        userData.id == order.order.supplier ? 
+                        <>
+                            <SmallButton text={"Deliver Product"} click={() => { handleDeliver() }} bgcolor={"var(--dark-blue)"} />
+                        </> :
+                            <SmallButton text={"Start Supplying"} click={() => { createRequest() }} bgcolor={"var(--dark-blue)"} />
                         : null}
                 <SmallButton text={"Product Details"} click={() => { navigate(`/products/${product.id}`) }} bgcolor={"var(--authentic)"} />
             </CardActions>

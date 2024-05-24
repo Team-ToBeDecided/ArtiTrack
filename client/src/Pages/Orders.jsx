@@ -38,7 +38,10 @@ const OrderPage = () => {
                 {orders.map((order) => {
                     return (
                         <>
-                            <OrderCard order={order} />
+                            {
+                                order.supplier !== userData.id ?
+                                    <OrderCard order={order} /> : null
+                            }
                         </>
                     )
                 })}

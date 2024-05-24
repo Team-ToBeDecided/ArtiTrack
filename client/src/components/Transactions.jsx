@@ -94,17 +94,17 @@ export function TransactionsProvider({ children }) {
                 console.error('Signer is not initialized');
                 return;
             }
-    
+
             // Create a contract instance
             const contract = new ethers.Contract(contractAddress, abi, signer);
             console.log('Contract instance created:', contract);
-    
+
             // Call the transferNFT function
             const tx = await contract.transferNFT(tokenId, toAddress);
-    
+
             // Wait for the transaction to be mined
             const receipt = await tx.wait();
-    
+
             console.log('NFT transferred successfully:', receipt);
             return receipt; // Ensure to return something to indicate success
         } catch (error) {
@@ -112,11 +112,36 @@ export function TransactionsProvider({ children }) {
             throw error; // Rethrow the error to handle it in the calling function
         }
     }
-    
+
+    async function deliverOrder(orderId) {
+        try {
+            // Ensure signer is available
+            if (!signer) {
+                console.error('Signer is not initialized');
+                return;
+            }
+
+            // Create a contract instance
+            const contract = new ethers.Contract(contractAddress, abi, signer);
+            console.log('Contract instance created:', contract);
+
+            // Call the deliverOrder function
+            const tx = await contract.deliverOrder(orderId);
+
+            // Wait for the transaction to be mined
+            const receipt = await tx.wait();
+
+            console.log('Order delivered successfully:', receipt);
+            return receipt; // Ensure to return something to indicate success
+        } catch (error) {
+            console.error('Error delivering order:', error);
+            throw error; // Rethrow the error to handle it in the calling function
+        }
+    }
 
 
     return (
-        <TransactionContext.Provider value={{ createOrder, trackOrder, transferNFT }}>
+        <TransactionContext.Provider value={{ createOrder, trackOrder, transferNFT, deliverOrder }}>
             {children}
         </TransactionContext.Provider>
     );
