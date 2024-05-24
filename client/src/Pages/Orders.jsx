@@ -43,13 +43,31 @@ const OrderPage = () => {
                     )
                 })}
             </Box>
-            {userData.role == "supplyChain" ? 
-            <>
-                <div className="flex p-16 justify-center">
-                    <Header text="Supply Chain Request" />
-                </div>
-
-            </> : null}
+            {userData.role == "supplyChain" ?
+                <>
+                    <div className="flex p-16 justify-center">
+                        <Header text="Supply Chain Request" />
+                    </div>
+                    <Box sx={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(3, 1fr)',
+                        gap: 10,
+                        padding: '20px',
+                        paddingLeft: '100px',
+                        margin: '20px',
+                    }}>
+                        {orders.map((order) => {
+                            return (
+                                <>
+                                    {
+                                        order.supplier == userData.id ?
+                                            <OrderCard order={order} /> : null
+                                    }
+                                </>
+                            )
+                        })}
+                    </Box>
+                </> : null}
         </>
     )
 }
